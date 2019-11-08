@@ -3,15 +3,7 @@
 @{ 
     var site = Model.Root();
     var selection = site.Children.Where(x => x.IsVisible());
-    var home = (Home)Model.Root();
 }
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
 <!-- uncomment this line if you don't want it to appear in the top navigation -->
 <a class="nav-link @Html.Raw(Model.Id == site.Id ? "navi-link--active" : "")" href="@site.Url">@site.Name</a>
 @foreach (var item in selection)
