@@ -280,7 +280,7 @@ __pycache__/
 **/App_Data/Logs/
 
 **/App_Data/[Pp]review/
-**/App_Data/TEMP/
+
 **/App_Data/NuGetBackup/
 
 # ImageProcessor Disk Cache 
