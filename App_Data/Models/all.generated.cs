@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6790b92d9ad39166")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "45b11331c251822e")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
 
 
 // FILE: models.generated.cs
@@ -913,56 +913,26 @@ namespace Umbraco.Web.PublishedModels
 		public bool UmbracoNavihide => NavigationBase.GetUmbracoNavihide(this);
 	}
 
-	/// <summary>Package</summary>
-	[PublishedModel("package")]
-	public partial class Package : PublishedContentModel
+	// Mixin Content Type with alias "categoryitem"
+	/// <summary>Category item</summary>
+	public partial interface ICategoryitem : IPublishedContent
 	{
-		// helpers
-#pragma warning disable 0109 // new is redundant
+		/// <summary>Name</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "package";
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new static IPublishedContentType GetModelContentType()
-			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Package, TValue>> selector)
-			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
-#pragma warning restore 0109
+		string CategoryItemName { get; }
 
-		// ctor
-		public Package(IPublishedContent content)
-			: base(content)
-		{ }
-
-		// properties
-
-		///<summary>
-		/// description
-		///</summary>
+		/// <summary>Description</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => this.Value<IHtmlString>("description");
+		IHtmlString Description { get; }
 
-		///<summary>
-		/// packageName
-		///</summary>
+		/// <summary>photo</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("packageName")]
-		public string PackageName => this.Value<string>("packageName");
-
-		///<summary>
-		/// price
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("price")]
-		public decimal Price => this.Value<decimal>("price");
+		IPublishedContent Photo { get; }
 	}
 
 	/// <summary>Category item</summary>
 	[PublishedModel("categoryitem")]
-	public partial class Categoryitem : PublishedContentModel
+	public partial class Categoryitem : PublishedContentModel, ICategoryitem
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -990,21 +960,33 @@ namespace Umbraco.Web.PublishedModels
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("categoryItemName")]
-		public string CategoryItemName => this.Value<string>("categoryItemName");
+		public string CategoryItemName => GetCategoryItemName(this);
+
+		/// <summary>Static getter for Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetCategoryItemName(ICategoryitem that) => that.Value<string>("categoryItemName");
 
 		///<summary>
 		/// Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("description")]
-		public IHtmlString Description => this.Value<IHtmlString>("description");
+		public IHtmlString Description => GetDescription(this);
+
+		/// <summary>Static getter for Description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetDescription(ICategoryitem that) => that.Value<IHtmlString>("description");
 
 		///<summary>
 		/// photo
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("photo")]
-		public IPublishedContent Photo => this.Value<IPublishedContent>("photo");
+		public IPublishedContent Photo => GetPhoto(this);
+
+		/// <summary>Static getter for photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetPhoto(ICategoryitem that) => that.Value<IPublishedContent>("photo");
 	}
 
 	/// <summary>Category</summary>
@@ -1087,6 +1069,672 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("umbracoNavihide")]
 		public bool UmbracoNavihide => NavigationBase.GetUmbracoNavihide(this);
+	}
+
+	/// <summary>Party</summary>
+	[PublishedModel("party")]
+	public partial class Party : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "party";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Party, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Party(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("categoryItemName")]
+		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
+
+		///<summary>
+		/// Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("description")]
+		public IHtmlString Description => Categoryitem.GetDescription(this);
+
+		///<summary>
+		/// photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("photo")]
+		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
+
+		///<summary>
+		/// Package description: Here you can put in packages description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageDescription")]
+		public IHtmlString PackageDescription => Packages.GetPackageDescription(this);
+
+		///<summary>
+		/// Package image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageImage")]
+		public IPublishedContent PackageImage => Packages.GetPackageImage(this);
+
+		///<summary>
+		/// Package price: Here ypu can put in the price of the packages
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagePrice")]
+		public string PackagePrice => Packages.GetPackagePrice(this);
+
+		///<summary>
+		/// Packages name: Here you can put packages name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesName")]
+		public string PackagesName => Packages.GetPackagesName(this);
+
+		///<summary>
+		/// Packages large description: Here you can add a description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeDescription")]
+		public IHtmlString PackagesLargeDescription => PackagesLarge.GetPackagesLargeDescription(this);
+
+		///<summary>
+		/// Packages large image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeImage")]
+		public IPublishedContent PackagesLargeImage => PackagesLarge.GetPackagesLargeImage(this);
+
+		///<summary>
+		/// Packages large name: Here you can add name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeName")]
+		public string PackagesLargeName => PackagesLarge.GetPackagesLargeName(this);
+
+		///<summary>
+		/// Packages large price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargePrice")]
+		public string PackagesLargePrice => PackagesLarge.GetPackagesLargePrice(this);
+
+		///<summary>
+		/// Packages medium description: Here you can add description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumDescription")]
+		public IHtmlString PackagesMediumDescription => PackagesMedium.GetPackagesMediumDescription(this);
+
+		///<summary>
+		/// Packages medium image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumImage")]
+		public IPublishedContent PackagesMediumImage => PackagesMedium.GetPackagesMediumImage(this);
+
+		///<summary>
+		/// Packages medium name: Here you can add a name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumName")]
+		public string PackagesMediumName => PackagesMedium.GetPackagesMediumName(this);
+
+		///<summary>
+		/// Packages medium price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumPrice")]
+		public string PackagesMediumPrice => PackagesMedium.GetPackagesMediumPrice(this);
+	}
+
+	/// <summary>Birthday</summary>
+	[PublishedModel("birthday")]
+	public partial class Birthday : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "birthday";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Birthday, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Birthday(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("categoryItemName")]
+		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
+
+		///<summary>
+		/// Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("description")]
+		public IHtmlString Description => Categoryitem.GetDescription(this);
+
+		///<summary>
+		/// photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("photo")]
+		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
+
+		///<summary>
+		/// Package description: Here you can put in packages description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageDescription")]
+		public IHtmlString PackageDescription => Packages.GetPackageDescription(this);
+
+		///<summary>
+		/// Package image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageImage")]
+		public IPublishedContent PackageImage => Packages.GetPackageImage(this);
+
+		///<summary>
+		/// Package price: Here ypu can put in the price of the packages
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagePrice")]
+		public string PackagePrice => Packages.GetPackagePrice(this);
+
+		///<summary>
+		/// Packages name: Here you can put packages name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesName")]
+		public string PackagesName => Packages.GetPackagesName(this);
+
+		///<summary>
+		/// Packages large description: Here you can add a description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeDescription")]
+		public IHtmlString PackagesLargeDescription => PackagesLarge.GetPackagesLargeDescription(this);
+
+		///<summary>
+		/// Packages large image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeImage")]
+		public IPublishedContent PackagesLargeImage => PackagesLarge.GetPackagesLargeImage(this);
+
+		///<summary>
+		/// Packages large name: Here you can add name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeName")]
+		public string PackagesLargeName => PackagesLarge.GetPackagesLargeName(this);
+
+		///<summary>
+		/// Packages large price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargePrice")]
+		public string PackagesLargePrice => PackagesLarge.GetPackagesLargePrice(this);
+
+		///<summary>
+		/// Packages medium description: Here you can add description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumDescription")]
+		public IHtmlString PackagesMediumDescription => PackagesMedium.GetPackagesMediumDescription(this);
+
+		///<summary>
+		/// Packages medium image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumImage")]
+		public IPublishedContent PackagesMediumImage => PackagesMedium.GetPackagesMediumImage(this);
+
+		///<summary>
+		/// Packages medium name: Here you can add a name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumName")]
+		public string PackagesMediumName => PackagesMedium.GetPackagesMediumName(this);
+
+		///<summary>
+		/// Packages medium price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumPrice")]
+		public string PackagesMediumPrice => PackagesMedium.GetPackagesMediumPrice(this);
+	}
+
+	/// <summary>Weddings</summary>
+	[PublishedModel("weddings")]
+	public partial class Weddings : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "weddings";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Weddings, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Weddings(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("categoryItemName")]
+		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
+
+		///<summary>
+		/// Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("description")]
+		public IHtmlString Description => Categoryitem.GetDescription(this);
+
+		///<summary>
+		/// photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("photo")]
+		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
+
+		///<summary>
+		/// Package description: Here you can put in packages description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageDescription")]
+		public IHtmlString PackageDescription => Packages.GetPackageDescription(this);
+
+		///<summary>
+		/// Package image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageImage")]
+		public IPublishedContent PackageImage => Packages.GetPackageImage(this);
+
+		///<summary>
+		/// Package price: Here ypu can put in the price of the packages
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagePrice")]
+		public string PackagePrice => Packages.GetPackagePrice(this);
+
+		///<summary>
+		/// Packages name: Here you can put packages name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesName")]
+		public string PackagesName => Packages.GetPackagesName(this);
+
+		///<summary>
+		/// Packages large description: Here you can add a description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeDescription")]
+		public IHtmlString PackagesLargeDescription => PackagesLarge.GetPackagesLargeDescription(this);
+
+		///<summary>
+		/// Packages large image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeImage")]
+		public IPublishedContent PackagesLargeImage => PackagesLarge.GetPackagesLargeImage(this);
+
+		///<summary>
+		/// Packages large name: Here you can add name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeName")]
+		public string PackagesLargeName => PackagesLarge.GetPackagesLargeName(this);
+
+		///<summary>
+		/// Packages large price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargePrice")]
+		public string PackagesLargePrice => PackagesLarge.GetPackagesLargePrice(this);
+
+		///<summary>
+		/// Packages medium description: Here you can add description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumDescription")]
+		public IHtmlString PackagesMediumDescription => PackagesMedium.GetPackagesMediumDescription(this);
+
+		///<summary>
+		/// Packages medium image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumImage")]
+		public IPublishedContent PackagesMediumImage => PackagesMedium.GetPackagesMediumImage(this);
+
+		///<summary>
+		/// Packages medium name: Here you can add a name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumName")]
+		public string PackagesMediumName => PackagesMedium.GetPackagesMediumName(this);
+
+		///<summary>
+		/// Packages medium price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumPrice")]
+		public string PackagesMediumPrice => PackagesMedium.GetPackagesMediumPrice(this);
+	}
+
+	// Mixin Content Type with alias "packages"
+	/// <summary>Packages</summary>
+	public partial interface IPackages : IPublishedContent
+	{
+		/// <summary>Package description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IHtmlString PackageDescription { get; }
+
+		/// <summary>Package image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent PackageImage { get; }
+
+		/// <summary>Package price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagePrice { get; }
+
+		/// <summary>Packages name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagesName { get; }
+	}
+
+	/// <summary>Packages</summary>
+	[PublishedModel("packages")]
+	public partial class Packages : PublishedContentModel, IPackages
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "packages";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Packages, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Packages(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Package description: Here you can put in packages description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageDescription")]
+		public IHtmlString PackageDescription => GetPackageDescription(this);
+
+		/// <summary>Static getter for Package description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetPackageDescription(IPackages that) => that.Value<IHtmlString>("packageDescription");
+
+		///<summary>
+		/// Package image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packageImage")]
+		public IPublishedContent PackageImage => GetPackageImage(this);
+
+		/// <summary>Static getter for Package image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetPackageImage(IPackages that) => that.Value<IPublishedContent>("packageImage");
+
+		///<summary>
+		/// Package price: Here ypu can put in the price of the packages
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagePrice")]
+		public string PackagePrice => GetPackagePrice(this);
+
+		/// <summary>Static getter for Package price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagePrice(IPackages that) => that.Value<string>("packagePrice");
+
+		///<summary>
+		/// Packages name: Here you can put packages name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesName")]
+		public string PackagesName => GetPackagesName(this);
+
+		/// <summary>Static getter for Packages name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagesName(IPackages that) => that.Value<string>("packagesName");
+	}
+
+	// Mixin Content Type with alias "packagesMedium"
+	/// <summary>Packages medium</summary>
+	public partial interface IPackagesMedium : IPublishedContent
+	{
+		/// <summary>Packages medium description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IHtmlString PackagesMediumDescription { get; }
+
+		/// <summary>Packages medium image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent PackagesMediumImage { get; }
+
+		/// <summary>Packages medium name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagesMediumName { get; }
+
+		/// <summary>Packages medium price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagesMediumPrice { get; }
+	}
+
+	/// <summary>Packages medium</summary>
+	[PublishedModel("packagesMedium")]
+	public partial class PackagesMedium : PublishedContentModel, IPackagesMedium
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "packagesMedium";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PackagesMedium, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public PackagesMedium(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Packages medium description: Here you can add description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumDescription")]
+		public IHtmlString PackagesMediumDescription => GetPackagesMediumDescription(this);
+
+		/// <summary>Static getter for Packages medium description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetPackagesMediumDescription(IPackagesMedium that) => that.Value<IHtmlString>("packagesMediumDescription");
+
+		///<summary>
+		/// Packages medium image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumImage")]
+		public IPublishedContent PackagesMediumImage => GetPackagesMediumImage(this);
+
+		/// <summary>Static getter for Packages medium image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetPackagesMediumImage(IPackagesMedium that) => that.Value<IPublishedContent>("packagesMediumImage");
+
+		///<summary>
+		/// Packages medium name: Here you can add a name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumName")]
+		public string PackagesMediumName => GetPackagesMediumName(this);
+
+		/// <summary>Static getter for Packages medium name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagesMediumName(IPackagesMedium that) => that.Value<string>("packagesMediumName");
+
+		///<summary>
+		/// Packages medium price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesMediumPrice")]
+		public string PackagesMediumPrice => GetPackagesMediumPrice(this);
+
+		/// <summary>Static getter for Packages medium price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagesMediumPrice(IPackagesMedium that) => that.Value<string>("packagesMediumPrice");
+	}
+
+	// Mixin Content Type with alias "packagesLarge"
+	/// <summary>Packages large</summary>
+	public partial interface IPackagesLarge : IPublishedContent
+	{
+		/// <summary>Packages large description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IHtmlString PackagesLargeDescription { get; }
+
+		/// <summary>Packages large image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent PackagesLargeImage { get; }
+
+		/// <summary>Packages large name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagesLargeName { get; }
+
+		/// <summary>Packages large price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PackagesLargePrice { get; }
+	}
+
+	/// <summary>Packages large</summary>
+	[PublishedModel("packagesLarge")]
+	public partial class PackagesLarge : PublishedContentModel, IPackagesLarge
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "packagesLarge";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<PackagesLarge, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public PackagesLarge(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Packages large description: Here you can add a description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeDescription")]
+		public IHtmlString PackagesLargeDescription => GetPackagesLargeDescription(this);
+
+		/// <summary>Static getter for Packages large description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetPackagesLargeDescription(IPackagesLarge that) => that.Value<IHtmlString>("packagesLargeDescription");
+
+		///<summary>
+		/// Packages large image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeImage")]
+		public IPublishedContent PackagesLargeImage => GetPackagesLargeImage(this);
+
+		/// <summary>Static getter for Packages large image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetPackagesLargeImage(IPackagesLarge that) => that.Value<IPublishedContent>("packagesLargeImage");
+
+		///<summary>
+		/// Packages large name: Here you can add name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargeName")]
+		public string PackagesLargeName => GetPackagesLargeName(this);
+
+		/// <summary>Static getter for Packages large name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagesLargeName(IPackagesLarge that) => that.Value<string>("packagesLargeName");
+
+		///<summary>
+		/// Packages large price: Here you can add price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("packagesLargePrice")]
+		public string PackagesLargePrice => GetPackagesLargePrice(this);
+
+		/// <summary>Static getter for Packages large price</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPackagesLargePrice(IPackagesLarge that) => that.Value<string>("packagesLargePrice");
 	}
 
 	/// <summary>Folder</summary>

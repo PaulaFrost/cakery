@@ -5,21 +5,22 @@
     var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : String.Empty;
 }
 
-<header class="masthead">
-  <div class="container h-100 ">
+<header class="jumbo">
+  <div class="col-md-12">
     <div class="row h-100 align-items-center">
       <div class="col-md-12 text-center">
-          <section class="col-md-12 h-100"
+          <section class="col-md-12 h-100 "
          style="background-image: url('@backgroundImage')">
-        <h1 class="font-weight-light">@Model.HeroHeader</h1>
-        <p class="lead">@Model.HeroDescription</p>
+        <h1 class="font-weight-light text-dark">@Model.HeroHeader</h1>
+        <p class="lead text-dark ">@Model.HeroDescription</p>
       </div>
     </div>
   </div>
 </header>
 
 
-<section class="col-md-12 h-100"
+<br>
+<!-- <section class="col-md-12 h-100"
          style="background-image: url('@backgroundImage')">
     <div class="section__hero-content">
         <h1>@Model.HeroHeader</h1>
@@ -31,7 +32,7 @@
             </a>
         }
     </div>
-</section>
+</section> -->
 
 
 
