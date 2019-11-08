@@ -4,7 +4,22 @@
     Layout = "master.cshtml";
     var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : String.Empty;
 }
-<section class="section section--full-height background-image-full overlay overlay--dark section--content-center section--thick-border"
+
+<header class="masthead">
+  <div class="container h-100 ">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-12 text-center">
+          <section class="col-md-12 h-100"
+         style="background-image: url('@backgroundImage')">
+        <h1 class="font-weight-light">@Model.HeroHeader</h1>
+        <p class="lead">@Model.HeroDescription</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<section class="col-md-12 h-100"
          style="background-image: url('@backgroundImage')">
     <div class="section__hero-content">
         <h1>@Model.HeroHeader</h1>
