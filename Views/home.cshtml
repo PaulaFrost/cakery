@@ -4,21 +4,33 @@
     Layout = "master.cshtml";
     var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : String.Empty;
 }
-
+<hr>
 <header class="jumbo">
   <div class="col-md-12">
     <div class="row h-100 align-items-center">
       <div class="col-md-12 text-center">
-          <section class="col-md-12 h-100 "
-         style="background-image: url('@backgroundImage')">
+          <!-- <section class="col-md-12 h-100 "
+         style="background-image: url('@backgroundImage')"> -->
         <h1 class="font-weight-light text-dark">@Model.HeroHeader</h1>
-        <p class="lead text-dark ">@Model.HeroDescription</p>
+        <!-- <p class="lead text-dark ">@Model.HeroDescription</p> -->
       </div>
     </div>
   </div>
 </header>
 
-
+<br>
+<div class="container">
+    <h4>@Model.Value("weddingPageName")</h4>
+    <a href="/wedding"><img class="img-fluid" src="/media/ltzkt054/joshua-glass-vilfdijcfvi-unsplash.jpg"></a>
+</div>
+<div class="container">
+    <h4>@Model.Value("birthdayPageName")</h4>
+    <a href="/birthday"><img class="img-fluid" src="/media/e0zgpvdn/cakes-on-table-1857157.jpg"></a>
+</div>
+<div class="container">
+    <h4>@Model.Value("partyPageName")</h4>
+    <a href="/party"><img class="img-fluid" src="/media/zjzptr05/people-toasting-wine-glasses-3171837.jpg"></a>
+</div>
 <br>
 <!-- <section class="col-md-12 h-100"
          style="background-image: url('@backgroundImage')">

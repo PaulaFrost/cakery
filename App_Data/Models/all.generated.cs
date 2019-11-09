@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "45b11331c251822e")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "74b955099d4847ea")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
 // FILE: models.generated.cs
@@ -479,7 +479,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>Home</summary>
 	[PublishedModel("home")]
-	public partial class Home : PublishedContentModel
+	public partial class Home : PublishedContentModel, INavigationToThePages
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -571,6 +571,48 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("sitename")]
 		public string Sitename => this.Value<string>("sitename");
+
+		///<summary>
+		/// Birthday page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("birthdayPageName")]
+		public string BirthdayPageName => NavigationToThePages.GetBirthdayPageName(this);
+
+		///<summary>
+		/// Birthday page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("birthdayPagePhoto")]
+		public IPublishedContent BirthdayPagePhoto => NavigationToThePages.GetBirthdayPagePhoto(this);
+
+		///<summary>
+		/// Party page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("partyPageName")]
+		public string PartyPageName => NavigationToThePages.GetPartyPageName(this);
+
+		///<summary>
+		/// Party page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("partyPagePhoto")]
+		public IPublishedContent PartyPagePhoto => NavigationToThePages.GetPartyPagePhoto(this);
+
+		///<summary>
+		/// Wedding page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("weddingPageName")]
+		public string WeddingPageName => NavigationToThePages.GetWeddingPageName(this);
+
+		///<summary>
+		/// Wedding page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("weddingPagePhoto")]
+		public IPublishedContent WeddingPagePhoto => NavigationToThePages.GetWeddingPagePhoto(this);
 	}
 
 	/// <summary>Feature</summary>
@@ -1735,6 +1777,127 @@ namespace Umbraco.Web.PublishedModels
 		/// <summary>Static getter for Packages large price</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public static string GetPackagesLargePrice(IPackagesLarge that) => that.Value<string>("packagesLargePrice");
+	}
+
+	// Mixin Content Type with alias "navigationToThePages"
+	/// <summary>Navigation to the pages</summary>
+	public partial interface INavigationToThePages : IPublishedContent
+	{
+		/// <summary>Birthday page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string BirthdayPageName { get; }
+
+		/// <summary>Birthday page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent BirthdayPagePhoto { get; }
+
+		/// <summary>Party page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string PartyPageName { get; }
+
+		/// <summary>Party page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent PartyPagePhoto { get; }
+
+		/// <summary>Wedding page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string WeddingPageName { get; }
+
+		/// <summary>Wedding page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent WeddingPagePhoto { get; }
+	}
+
+	/// <summary>Navigation to the pages</summary>
+	[PublishedModel("navigationToThePages")]
+	public partial class NavigationToThePages : PublishedContentModel, INavigationToThePages
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "navigationToThePages";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<NavigationToThePages, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public NavigationToThePages(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Birthday page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("birthdayPageName")]
+		public string BirthdayPageName => GetBirthdayPageName(this);
+
+		/// <summary>Static getter for Birthday page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetBirthdayPageName(INavigationToThePages that) => that.Value<string>("birthdayPageName");
+
+		///<summary>
+		/// Birthday page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("birthdayPagePhoto")]
+		public IPublishedContent BirthdayPagePhoto => GetBirthdayPagePhoto(this);
+
+		/// <summary>Static getter for Birthday page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetBirthdayPagePhoto(INavigationToThePages that) => that.Value<IPublishedContent>("birthdayPagePhoto");
+
+		///<summary>
+		/// Party page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("partyPageName")]
+		public string PartyPageName => GetPartyPageName(this);
+
+		/// <summary>Static getter for Party page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetPartyPageName(INavigationToThePages that) => that.Value<string>("partyPageName");
+
+		///<summary>
+		/// Party page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("partyPagePhoto")]
+		public IPublishedContent PartyPagePhoto => GetPartyPagePhoto(this);
+
+		/// <summary>Static getter for Party page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetPartyPagePhoto(INavigationToThePages that) => that.Value<IPublishedContent>("partyPagePhoto");
+
+		///<summary>
+		/// Wedding page name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("weddingPageName")]
+		public string WeddingPageName => GetWeddingPageName(this);
+
+		/// <summary>Static getter for Wedding page name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetWeddingPageName(INavigationToThePages that) => that.Value<string>("weddingPageName");
+
+		///<summary>
+		/// Wedding page photo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("weddingPagePhoto")]
+		public IPublishedContent WeddingPagePhoto => GetWeddingPagePhoto(this);
+
+		/// <summary>Static getter for Wedding page photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetWeddingPagePhoto(INavigationToThePages that) => that.Value<IPublishedContent>("weddingPagePhoto");
 	}
 
 	/// <summary>Folder</summary>
