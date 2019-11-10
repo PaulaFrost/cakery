@@ -295,3 +295,6 @@ __pycache__/
 # Ensure VisualStudio.gitignore is included before this
 !**/App_Data/[Pp]ackages/
 !**/[Uu]mbraco/[Dd]eveloper/[Pp]ackages
+App_Data/TEMP/ClientDependency/LAPTOP-9AES9VUC-108b2ea13aa71b33c292e8741ccc5fd0-map.xml
+App_Data/TEMP/ClientDependency/LAPTOP-9AES9VUC-108b2ea13aa71b33c292e8741ccc5fd0-map.xml
+.vscode/iisexpress.json

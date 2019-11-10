@@ -17,32 +17,38 @@
 <br>
 <br>
 
-<div class="d-flex flex-row bd-highlight mb-3">
-	<div class="p-2 bd-highlight">
+<div id="package" class="d-flex flex-row bd-highlight mb-3">
+	<div class="card p-2 bd-highlight" style="width: 25rem;">
 		<h5>@Model.Value("packagesName")</h5>
-		<p class="text-description">@Model.Value("packageDescription")</p>
-		<h6>Price: @Model.Value("packagePrice")</h6>
-		<img class="img-fluid" src="/media/vm1n4hel/celebration-colorful-colourful-cupcakes-587741.jpg">
-		<br><br>
-		<button>Buy</button>
+		<div class="card-body">
+			<p class="text-description">@Model.Value("packageDescription")</p>
+			<h6>Price: @Model.Value("packagePrice")</h6>
+			<img class="img-fluid rounded" src="/media/vm1n4hel/celebration-colorful-colourful-cupcakes-587741.jpg" alt="Cupcakes">
+			<br><br>
+			<button><a href="/shopping-cart">buy</a></button>
+		</div>
 		
 	</div>
-	<div class="p-2 bd-highlight">
+	<div id="package" class="card p-2 bd-highlight" style="width: 25rem;">
 		<h5>@Model.Value("packagesMediumName")</h5>
-		<p class="text-description">@Model.Value("packagesMediumDescription")</p>
-		<h6>Price: @Model.Value("packagesMediumPrice")</h6>
-		<img class="img-fluid " src="/media/0pbb0hri/anniversary-birthday-cake-celebration-410398.jpg">
-		<br><br>
-		<button>Buy</button>
+		<div class="card-body">
+			<p class="text-description">@Model.Value("packagesMediumDescription")</p>
+			<h6>Price: @Model.Value("packagesMediumPrice")</h6>
+			<img class="img-fluid rounded" src="/media/0pbb0hri/anniversary-birthday-cake-celebration-410398.jpg" alt="wedding cake">
+			<br><br>
+			<button><a href="/shopping-cart">buy</a></button>
+		</div>
 		
 	</div>
-	<div class="p-2 bd-highlight">
+	<div id="package" class="card p-2 bd-highlight" style="width: 25rem;">
 		<h5>@Model.Value("packagesLargeName")</h5>
-		<p class="text-description">@Model.Value("packagesLargeDescription")</p>
-		<h6>Price: @Model.Value("packagesLargePrice")</h6>
-		<img class="img-fluid" src="/media/owwoocfu/person-pouring-champagne-on-champagne-flutes-3171770.jpg">
-		<br><br>
-		<button>Buy</button>
+		<div class="card-body">
+			<p class="text-description">@Model.Value("packagesLargeDescription")</p>
+			<h6>Price: @Model.Value("packagesLargePrice")</h6>
+			<img class="img-fluid rounded" src="/media/owwoocfu/person-pouring-champagne-on-champagne-flutes-3171770.jpg" alt="champagne">
+			<br><br>
+			<button><a href="/shopping-cart">buy</a></button>
+		</div>
 		
 	</div>
 	<br>

@@ -18,32 +18,34 @@
 <br>
 
 <div class="d-flex flex-row bd-highlight mb-3">
-	<div class="p-2 bd-highlight">
+	<div id="packageBirtday" class="p-2 bd-highlight">
 		<h5>@Model.Value("packagesName")</h5>
 		<p class="text-description">@Model.Value("packageDescription")</p>
 		<h6>Price: @Model.Value("packagePrice")</h6>
 		<img class="img-fluid" src="/media/p5efie22/yellow-pink-and-blue-party-balloons-796606.jpg">
 		<br><br>
-		<button>Buy</button>
+		<button onclick="buyButton()" id="buyButton">buy</button>
 		
 	</div>
-	<div class="p-2 bd-highlight">
+	<div id="package" class="p-2 bd-highlight">
 		<h5>@Model.Value("packagesMediumName")</h5>
 		<p class="text-description">@Model.Value("packagesMediumDescription")</p>
 		<h6>Price: @Model.Value("packagesMediumPrice")</h6>
 		<img class="img-fluid " src="/media/mtrjv21y/three-pineapples-with-gold-party-hats-1071883.jpg">
 		<br><br>
-		<button>Buy</button>
+		<button id="buyButton"><a href="/shopping-cart">buy</a></button>
 		
 	</div>
-	<div class="p-2 bd-highlight">
+	<div id="package" class="p-2 bd-highlight">
 		<h5>@Model.Value("packagesLargeName")</h5>
 		<p class="text-description">@Model.Value("packagesLargeDescription")</p>
 		<h6>Price: @Model.Value("packagesLargePrice")</h6>
 		<img class="img-fluid" src="/media/xjmlh1mi/heather-ford-fq54fqucgce-unsplash.jpg">
 		<br><br>
-		<button>Buy</button>
+		<button id="buyButton"><a href="/shopping-cart">buy</a></button>
 		
 	</div>
 	<br>
 </div>
+
+
