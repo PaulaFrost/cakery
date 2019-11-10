@@ -17,50 +17,40 @@
     <title>@Model.Name - @home.Sitename</title>
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
+    <link rel="stickyFooterStyle" href="@Url.Content("~/css/stickyFooter.css")" />
     <!-- <link rel="stylesheet" href="@Url.Content("~/css/umbraco-starterkit-style.css")" />  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     @RenderSection("Header", required: false)
 </head>
 
 <body class="frontpage theme-font-@font theme-color-@colorTheme">
-    <div class="mobile-nav">
-        <nav class="nav-bar">
-            @Html.Partial("~/views/partials/navigation/topNavigation.cshtml")
-        </nav>
-    </div>
-
-    <header class="header">
-
-        <!-- <div class="logo">
-            @if (home.SiteLogo != null && !string.IsNullOrEmpty(home.SiteLogo.Url))
-            {
-                <div class="nav-link--home">
-                    <img class="logo-image" src="@home.SiteLogo.Url" alt="@home.Sitename">
-                </div>
-            }
-            else
-            {
-                <a class="nav-link nav-link--home nav-link--home__text logo-text" href="/">@home.Sitename</a>
-            }
-        </div> -->
-
-        <div class="mobile-nav-handler">
-            <div class="hamburger lines" id="toggle-nav">
-                <span></span>
-            </div>
+     
+     <div class="mobile-nav">
+            <nav class="nav-bar">
+                @Html.Partial("~/views/partials/navigation/topNavigation.cshtml")
+            </nav>
         </div>
 
-    </header>
+    <section class="container">
+    
+        <header class="header">
+        </header>
 
-    <main>
-        @RenderBody()
-    </main>
+        <main>
+            @RenderBody()
+        </main>
 
-    <footer class="py-4 bg-secondary text-center text-white mt-5 mt-lg-0">
-      © 2019  @home.FooterAddress
-  </footer>
+        <footer class="py-4 bg-secondary text-center text-white mt-5 mt-lg-0">
+                © 2019  @home.FooterAddress
+        </footer>
+       
+    </section>
+
+     
+   
     <!-- <footer class="section--themed">
         <div class="container">
             <div class="row">

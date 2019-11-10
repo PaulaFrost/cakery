@@ -5,7 +5,57 @@
 
 @* the fun starts here *@
 <hr>
-<div class="col-md-12">
+
+<div class="container container-fluid">
+	<div class="row mb-3">
+		<div class="col-sm-6 col-md-6 col-xl-6 ">
+			<img class="img-fluid" src="/media/owwoocfu/person-pouring-champagne-on-champagne-flutes-3171770.jpg">
+		</div>
+		<div class="col-sm-6 col-md-6 col-xl-6">
+			<h4>@Model.Value("categoryItemName")</h4>
+			<p>@Model.Value("description")</p>
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		<div class="card" style="width: 23rem;">
+			<img class="img-fluid" src="/media/ld4goril/alcoholic-beverages-beverages-blur-bottles-587738.jpg" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">@Model.Value("packagesName")</h5>
+				<p class="card-text">@Model.Value("packageDescription")
+					Price: @Model.Value("packagePrice")
+				</p>
+				<a href="#" class="btn btn-primary">Buy</a>
+			</div>
+		</div>
+
+		<div class="card" style="width: 23rem;">
+			<img class="img-fluid" class="img-fluid " src="/media/zjzptr05/people-toasting-wine-glasses-3171837.jpg" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">@Model.Value("packagesMediumName")</h5>
+				<p class="card-text">@Model.Value("packagesMediumDescription")
+					Price: @Model.Value("packagesMediumPrice")
+				</p>
+				<a href="#" class="btn btn-primary">Buy</a>
+			</div>
+		</div>
+
+		<div class="card" style="width: 23rem;">
+			<img class="img-fluid" src="/media/oi2gjjoo/man-night-bar-barman-110472.jpg" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">@Model.Value("packagesLargeName")</h5>
+				<p class="card-text">@Model.Value("packagesLargeDescription")
+					Price: @Model.Value("packagesLargePrice")
+				</p>
+				<a href="#" class="btn btn-primary">Buy</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- <div class="col-md-12">
     <div class="row h-100 align-items-center">
       <div class="col-md-12 text-center">
         <h1 class="font-weight-light text-dark">@Model.Value("categoryItemName")</h1>
@@ -46,4 +96,4 @@
 		
 	</div>
 	<br>
-</div>
+</div> -->
