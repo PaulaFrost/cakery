@@ -84,44 +84,44 @@ class Display {
 
                      cart = [...cart,cartItem];
                      DataStorage.saveCart(cart);
-                    //console.log(cart);
+                    console.log(cart);
                     
-                    this.setCartValue(cart);
+                   // this.setCartValue(cart);
 
-                    this.addCartItem(cartItem);
+                   // this.addCartItem(cartItem);
                  });
              
          });
     }
-    setCartValue(cart){
-        let totalSum = 0;
-        cart.map(item => {
-            totalSum += item.price * item.amount;
-        })
-        //Not working??
-       total.innerText = parseFloat(totalSum.toFixed(2));
-       console.log(total);
-    }
-    addCartItem(item){
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-        <div>
-        <label >${item.name}</label>
-        <label >${item.price}</label>
-        <span class="remove-item" id=${item.id}>remove</span>
-        </div>
-        <div>
-        <i class="fas fa-chevron-up" id=${item.id}></i>
-        <label class="moms">Moms: </label>
-        <label id="item-amount">Amount: ${item.amount}</label>
-        <i class="fas fa-chevron-down" id=${item.id}></i>
-        </div>
-        `;
-        cartContent.appendChild(div);
-        console.log(cartContent);
-        //Den hittar inte min shopping cart??
-    }
+    // setCartValue(cart){
+    //     let totalSum = 0;
+    //     cart.map(item => {
+    //         totalSum += item.price * item.amount;
+    //     })
+    //     //Not working??
+    //    total.innerText = parseFloat(totalSum.toFixed(2));
+    //    console.log(total);
+    // }
+    // addCartItem(item){
+    //     const div = document.createElement('div');
+    //     div.classList.add('cart-item');
+    //     div.innerHTML = `
+    //     <div>
+    //     <label >${item.name}</label>
+    //     <label >${item.price}</label>
+    //     <span class="remove-item" id=${item.id}>remove</span>
+    //     </div>
+    //     <div>
+    //     <i class="fas fa-chevron-up" id=${item.id}></i>
+    //     <label class="moms">Moms: </label>
+    //     <label id="item-amount">Amount: ${item.amount}</label>
+    //     <i class="fas fa-chevron-down" id=${item.id}></i>
+    //     </div>
+    //     `;
+    //     cartContent.appendChild(div);
+    //     console.log(cartContent);
+    //     //Den hittar inte min shopping cart??
+    // }
     
 }
 
