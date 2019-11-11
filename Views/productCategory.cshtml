@@ -1,0 +1,32 @@
+﻿@inherits UmbracoViewPage<ProductCategory>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+<!-- for the section we want to show the shop header -->
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml", Model.Parent)
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="productCategory-image-container">
+                    <img class="productCategory-image" src="@Model.ProductCategoryImage.Url" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1>@Model.ProductCategoryName</h1>
+               
+                <div class="product-teaser">@Model.ProductCategoryDescription</div>
+                <div class="product-button">
+                    <button class="button button--border--solid">Buy</button>
+                </div>
+        </div>
+    </div>
+</section>
+<section class="section section--sand">
+    <div class="container">
+        <!-- todo: Check if grid is empty via a property value converter -->
+        @Html.GetGridHtml(Model, "bodyText", "bootstrap3-fluid")
+    </div>
+</section>

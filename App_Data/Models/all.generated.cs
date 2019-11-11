@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "cf090bcd54887b83")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.4")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "b26641191107e1ff")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -983,83 +983,7 @@ namespace Umbraco.Web.PublishedModels
 		public bool UmbracoNavihide => NavigationBase.GetUmbracoNavihide(this);
 	}
 
-	// Mixin Content Type with alias "categoryitem"
-	/// <summary>Category item</summary>
-	public partial interface ICategoryitem : IPublishedContent
-	{
-		/// <summary>Name</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		string CategoryItemName { get; }
-
-		/// <summary>Description</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		IHtmlString Description { get; }
-
-		/// <summary>photo</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		IPublishedContent Photo { get; }
-	}
-
-	/// <summary>Category item</summary>
-	[PublishedModel("categoryitem")]
-	public partial class Categoryitem : PublishedContentModel, ICategoryitem
-	{
-		// helpers
-#pragma warning disable 0109 // new is redundant
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "categoryitem";
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new static IPublishedContentType GetModelContentType()
-			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Categoryitem, TValue>> selector)
-			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
-#pragma warning restore 0109
-
-		// ctor
-		public Categoryitem(IPublishedContent content)
-			: base(content)
-		{ }
-
-		// properties
-
-		///<summary>
-		/// Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryItemName")]
-		public string CategoryItemName => GetCategoryItemName(this);
-
-		/// <summary>Static getter for Name</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static string GetCategoryItemName(ICategoryitem that) => that.Value<string>("categoryItemName");
-
-		///<summary>
-		/// Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => GetDescription(this);
-
-		/// <summary>Static getter for Description</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IHtmlString GetDescription(ICategoryitem that) => that.Value<IHtmlString>("description");
-
-		///<summary>
-		/// photo
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("photo")]
-		public IPublishedContent Photo => GetPhoto(this);
-
-		/// <summary>Static getter for photo</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedContent GetPhoto(ICategoryitem that) => that.Value<IPublishedContent>("photo");
-	}
-
-	/// <summary>Category</summary>
+	/// <summary>Product List</summary>
 	[PublishedModel("category")]
 	public partial class Category : PublishedContentModel, IContentBase, INavigationBase
 	{
@@ -1085,25 +1009,11 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
-		/// categoryBody
+		/// product categories list
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryBody")]
-		public IHtmlString CategoryBody => this.Value<IHtmlString>("categoryBody");
-
-		///<summary>
-		/// categoryitems
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryitems")]
-		public IEnumerable<IPublishedContent> Categoryitems => this.Value<IEnumerable<IPublishedContent>>("categoryitems");
-
-		///<summary>
-		/// header
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("header")]
-		public string Header => this.Value<string>("header");
+		[ImplementPropertyType("productCategoriesList")]
+		public IEnumerable<IPublishedContent> ProductCategoriesList => this.Value<IEnumerable<IPublishedContent>>("productCategoriesList");
 
 		///<summary>
 		/// Content
@@ -1143,7 +1053,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>Party</summary>
 	[PublishedModel("party")]
-	public partial class Party : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	public partial class Party : PublishedContentModel, IPackages, IPackagesLarge, IPackagesMedium
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -1165,27 +1075,6 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
-
-		///<summary>
-		/// Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryItemName")]
-		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
-
-		///<summary>
-		/// Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => Categoryitem.GetDescription(this);
-
-		///<summary>
-		/// photo
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("photo")]
-		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
 
 		///<summary>
 		/// Package description: Here you can put in packages description
@@ -1274,7 +1163,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>Birthday</summary>
 	[PublishedModel("birthday")]
-	public partial class Birthday : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	public partial class Birthday : PublishedContentModel, IPackages, IPackagesLarge, IPackagesMedium
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -1296,27 +1185,6 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
-
-		///<summary>
-		/// Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryItemName")]
-		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
-
-		///<summary>
-		/// Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => Categoryitem.GetDescription(this);
-
-		///<summary>
-		/// photo
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("photo")]
-		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
 
 		///<summary>
 		/// Package description: Here you can put in packages description
@@ -1405,7 +1273,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>Weddings</summary>
 	[PublishedModel("weddings")]
-	public partial class Weddings : PublishedContentModel, ICategoryitem, IPackages, IPackagesLarge, IPackagesMedium
+	public partial class Weddings : PublishedContentModel, IPackages, IPackagesLarge, IPackagesMedium
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -1427,27 +1295,6 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
-
-		///<summary>
-		/// Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryItemName")]
-		public string CategoryItemName => Categoryitem.GetCategoryItemName(this);
-
-		///<summary>
-		/// Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => Categoryitem.GetDescription(this);
-
-		///<summary>
-		/// photo
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("photo")]
-		public IPublishedContent Photo => Categoryitem.GetPhoto(this);
 
 		///<summary>
 		/// Package description: Here you can put in packages description
@@ -1986,6 +1833,60 @@ namespace Umbraco.Web.PublishedModels
 		/// <summary>Static getter for Wedding page photo</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public static IPublishedContent GetWeddingPagePhoto(INavigationToThePages that) => that.Value<IPublishedContent>("weddingPagePhoto");
+	}
+
+	/// <summary>product category</summary>
+	[PublishedModel("productCategory")]
+	public partial class ProductCategory : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "productCategory";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ProductCategory, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ProductCategory(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("bodyText")]
+		public Newtonsoft.Json.Linq.JToken BodyText => this.Value<Newtonsoft.Json.Linq.JToken>("bodyText");
+
+		///<summary>
+		/// product category description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("productCategoryDescription")]
+		public IHtmlString ProductCategoryDescription => this.Value<IHtmlString>("productCategoryDescription");
+
+		///<summary>
+		/// product category image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("productCategoryImage")]
+		public IPublishedContent ProductCategoryImage => this.Value<IPublishedContent>("productCategoryImage");
+
+		///<summary>
+		/// product category name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("productCategoryName")]
+		public string ProductCategoryName => this.Value<string>("productCategoryName");
 	}
 
 	/// <summary>Folder</summary>
