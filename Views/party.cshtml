@@ -23,9 +23,9 @@
 			<div class="card-body">
 				<h5 class="card-title">@Model.Value("packagesName")</h5>
 				<p class="card-text">@Model.Value("packageDescription")
-					Price: @Model.Value("packagePrice")
+				<p name="price">	Price: @Model.Value("packagePrice") </p>
 				</p>
-				<a href="#" class="btn btn-primary">Buy</a>
+				<button id="but1" class="cartBtn"><a  href="#" class="btn btn-primary">Buy</a></button>
 			</div>
 		</div>
 
@@ -36,7 +36,7 @@
 				<p class="card-text">@Model.Value("packagesMediumDescription")
 					Price: @Model.Value("packagesMediumPrice")
 				</p>
-				<a href="#" class="btn btn-primary">Buy</a>
+				<button id="but2" class="cartBtn"><a href="#" class="btn btn-primary">Buy</a></button>
 			</div>
 		</div>
 
@@ -47,7 +47,7 @@
 				<p class="card-text">@Model.Value("packagesLargeDescription")
 					Price: @Model.Value("packagesLargePrice")
 				</p>
-				<a href="#" class="btn btn-primary">Buy</a>
+				<button id="but3" class="cartBtn"><a href="#" class="btn btn-primary">Buy</a></button>
 			</div>
 		</div>
 
