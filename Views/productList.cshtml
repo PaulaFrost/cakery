@@ -13,17 +13,10 @@
                 foreach (ProductCategory productC in Model.ProductCategoriesList)
                 {
                     <div class="card" style="width: 18rem;">
-                     <img class="card-img-top" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
-                    <div class="card-body">
-                    <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
-                    </div>
-
-                  <!-- <a href="@productC.Url" class="product-grid__item" style="background-image: url('@productC.ProductCategoryImage.Url')">
-                        <div class="product-grid__item__overlay">
-                            <div class="product-grid__item__name">@productC.ProductCategoryName</div>
-                           
+                        <img class="card-img-top" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
                         </div>
-                    </a> -->
                     </div>
                 }
             }
