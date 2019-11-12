@@ -1,0 +1,67 @@
+{
+    "packages": [
+        {
+            "system": {"id": "but6"},
+            "info": {
+                "name": "WeddingBig",
+                "price": "25.99"
+            } 
+        },
+        {
+            "system": {"id": "but5"},
+            "info": {
+                "name": "WeddingMed",
+                "price": "15.99"
+            }
+        },
+        {
+            "system": {"id": "but4"},
+            "info": {
+                "name": "WeddingSmall",
+                "price": "5.99"
+            }
+        },
+        {
+            "system": {"id": "but3"},
+            "info": {
+                "name": "PartyBig",
+                "price": "10.99"
+            }
+        },
+        {
+            "system": {"id": "but2"},
+            "info": {
+                "name": "PartyMed",
+                "price": "8.99"
+            }
+        },
+        {
+            "system": {"id": "but1"},
+            "info": {
+                "name": "PartySmall",
+                "price": "5.99"
+            }
+        },
+        {
+            "system": {"id": "but9"},
+            "info": {
+                "name": "BirthdayBig",
+                "price": "9.99"
+            }
+        },
+        {
+            "system": {"id": "but8"},
+            "info": {
+                "name": "BirthdayMed",
+                "price": "6.99"
+            }
+        },
+        {
+            "system": {"id": "but7"},
+            "info": {
+                "name": "BirthdaySmall",
+                "price": "3.99"
+            }
+        }
+    ]
+}
