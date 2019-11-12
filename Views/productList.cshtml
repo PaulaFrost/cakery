@@ -12,16 +12,28 @@
             {
                 foreach (ProductCategory productC in Model.ProductCategoriesList)
                 {
-                  <a href="@productC.Url" class="product-grid__item" style="background-image: url('@productC.ProductCategoryImage.Url')">
+                    <div class="card" style="width: 18rem;">
+                     <img class="card-img-top" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
+                    </div>
+
+                  <!-- <a href="@productC.Url" class="product-grid__item" style="background-image: url('@productC.ProductCategoryImage.Url')">
                         <div class="product-grid__item__overlay">
                             <div class="product-grid__item__name">@productC.ProductCategoryName</div>
                            
                         </div>
-                    </a>
+                    </a> -->
+                    </div>
                 }
             }
         </div>
     </div>
 
 </section>
-
+<!-- 
+<div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div> -->
