@@ -54,8 +54,22 @@ class ShoppingCart {
   }
 
   render(cartEl = document.querySelector(".cart-body")) {
+    if (!cartEl) {
+      return;
+    }
+
+    if (!this.cart.length) {
+      cartEl.innerHTML = `
+        <p>Your cart is empty</p>
+        `;
+      return;
+    }
+
+    console.log(this.cart); // Här avslutade Paula
+
     cartEl.innerHTML = `
-      <p>HEllluuuuu</p>
+      <p>HAlluuuuuuu, här kan man skriva saker</p>  
+        
       `;
   }
 }
