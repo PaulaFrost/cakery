@@ -14,7 +14,7 @@ class ShoppingCart {
   constructor() {
     this.cart = store.cart || [];
     this.addListener();
-    
+    this.render();
   }
 
   addListener() {
@@ -46,6 +46,17 @@ class ShoppingCart {
   save() {
     store.cart = this.cart;
     store.save();
+  }
+
+  load() {
+    // hitta class="cart-body"
+    // skriv ut från localstorage
+  }
+
+  render(cartEl = document.querySelector(".cart-body")) {
+    cartEl.innerHTML = `
+      <p>HEllluuuuu</p>
+      `;
   }
 }
 
