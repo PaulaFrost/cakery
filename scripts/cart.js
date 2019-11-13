@@ -50,14 +50,19 @@ class ShoppingCart {
 
   //det som skriver ut på shopping cart sidan
 
-  render(cartEl = document.querySelector(".cart-body")) {
+  render(
+    cartEl = document.querySelector(".cart-body"),
+    totalEl = document.querySelector(".total-amount")
+  ) {
     if (!cartEl) {
       return;
     }
 
     if (!this.cart.length) {
       cartEl.innerHTML = `
-        <p>Your cart is empty</p>
+      <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
+        <h4>Your cart currently is empty..</h4>
+      </div>
         `;
       return;
     }
@@ -65,13 +70,39 @@ class ShoppingCart {
     console.log(this.cart);
 
     cartEl.innerHTML = `
-    ${this.cart.map(
-      ({ name, price }) => `
-    <p>${name}</p>
-    <p>${price}</p>`
-    )}
-    `
-    ;
+    ${this.cart
+      .map(
+        ({ name, price }) => `
+      <div class="col-sm-6 col-md-4 col-xl-5">
+          <p>${name}</p>
+      </div>
+       <div class="col-sm-6 col-md-4 col-xl-2">
+          <p>${price}</p>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-2">
+          <p>SEK</p>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-2">
+        <button>Remove</button>
+      </div>
+        `
+      )
+      .join("")}`;
+
+    let total = this.cart.reduce((sum, { price }) => sum + price, 0);
+    let moms = total*0.2
+
+    totalEl.innerHTML = `
+    <div class="col-sm-6 col-md-4 col-xl-5">
+          <h5>Moms: ${moms}</h5>
+      </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Total: ${total}</h5>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-2">
+          <p>SEK</p>
+      </div>
+    `; 
   }
 }
 
