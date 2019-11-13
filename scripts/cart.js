@@ -48,10 +48,7 @@ class ShoppingCart {
     store.save();
   }
 
-  load() {
-    // hitta class="cart-body"
-    // skriv ut från localstorage
-  }
+  //det som skriver ut på shopping cart sidan
 
   render(cartEl = document.querySelector(".cart-body")) {
     if (!cartEl) {
@@ -65,12 +62,15 @@ class ShoppingCart {
       return;
     }
 
-    console.log(this.cart); // Här avslutade Paula
+    console.log(this.cart);
 
     cartEl.innerHTML = `
-      <p>HAlluuuuuuu, här kan man skriva saker</p>  
-        
-      `;
+    ${this.cart.map(
+      ({ name, price }) => `
+    <p>${name}</p>
+    <p>${price}</p>`
+    )}
+    `;
   }
 }
 
