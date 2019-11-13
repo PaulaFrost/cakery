@@ -70,7 +70,8 @@ class ShoppingCart {
     <p>${name}</p>
     <p>${price}</p>`
     )}
-    `;
+    `
+    ;
   }
 }
 
