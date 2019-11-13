@@ -48,7 +48,7 @@ class ShoppingCart {
     store.save();
   }
 
-  //det som skriver ut på shopping cart sidan
+  //Shows content i shopping cart page
 
   render(
     cartEl = document.querySelector(".cart-body"),
@@ -73,36 +73,39 @@ class ShoppingCart {
     ${this.cart
       .map(
         ({ name, price }) => `
-      <div class="col-sm-6 col-md-4 col-xl-5">
-          <p>${name}</p>
-      </div>
-       <div class="col-sm-6 col-md-4 col-xl-2">
-          <p>${price}</p>
-      </div>
-      <div class="col-sm-6 col-md-4 col-xl-2">
-          <p>SEK</p>
-      </div>
-      <div class="col-sm-6 col-md-4 col-xl-2">
-        <button>Remove</button>
-      </div>
+        <div class="col-sm-6 col-md-4 col-xl-5">
+            <p>${name}</p>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+            <p>${price}</p>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+            <p>SEK</p>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <button class="remove-btn">Remove</button>
+        </div>
         `
       )
       .join("")}`;
 
-    let total = this.cart.reduce((sum, { price }) => sum + price, 0);
-    let moms = total*0.2
+    let totalProd = this.cart.reduce((sum, { price }) => sum + price, 0);
+    let moms = totalProd * 0.2;
+    let shippingPrice = 150;
+    let total = totalProd + shippingPrice;
 
     totalEl.innerHTML = `
+    <div class="col-sm-6 col-md-4 col-xl-3">
+          <h5>Shipping: ${shippingPrice} SEK</h5>
+      </div>
     <div class="col-sm-6 col-md-4 col-xl-5">
-          <h5>Moms: ${moms}</h5>
+          <h5>VAT: ${moms} SEK</h5>
+    </div>
+        <div class="col-sm-6 col-md-4 col-xl-4">
+          <h5>Total: ${total} SEK</h5>
+          <button class="order-btn" >Order now!</button>
       </div>
-        <div class="col-sm-6 col-md-4 col-xl-2">
-          <h5>Total: ${total}</h5>
-      </div>
-      <div class="col-sm-6 col-md-4 col-xl-2">
-          <p>SEK</p>
-      </div>
-    `; 
+    `;
   }
 }
 
