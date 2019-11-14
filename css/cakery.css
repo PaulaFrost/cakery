@@ -3,6 +3,18 @@
     width: 200px;
 }
 
-.backgroundColor{
-    background-color: blue;
+.card-text {
+    color: #B8B4A7;
+}
+
+.card-title {
+    color: #F3B2FE
+}
+
+.cupCakeImg {
+    margin-right: 10rem;
+}
+
+.threeTwo{
+    color: rgb(252, 134, 154);
 }

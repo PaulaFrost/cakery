@@ -7,3 +7,7 @@ body {
 main {
     flex: 1;
 }
+
+.footer {
+    background-color: #269abc;
+}
