@@ -13,8 +13,9 @@ store.save = function() {
 class ShoppingCart {
   constructor() {
     this.cart = store.cart || [];
-    this.addListener();
     this.render();
+    this.addListener();
+    this.addListenerRemove();
   }
 
   addListener() {
@@ -31,6 +32,27 @@ class ShoppingCart {
       let deal = productEl.querySelector(".deal");
       this.add(name, price, deal);
     });
+  }
+
+  addListenerRemove() {
+    let removeBtn = document.querySelectorAll(".remove-btn");
+
+    if (!removeBtn) {
+      return;
+    }
+    console.log(removeBtn);
+
+    for (let i = 0; i < removeBtn.length; i++) {
+      removeBtn[i].addEventListener("click", e => {
+        console.log("heeej");
+        let productEl = e.target.closest(".row");
+        let name = productEl.querySelector(".prodName").innerHTML;
+        console.log(name);
+
+        this.remove(name);
+        this.render();
+      });
+    }
   }
 
   add(name, price, deal, quantity = 1) {
@@ -51,13 +73,17 @@ class ShoppingCart {
     }
 
     console.log(this.cart);
-
     this.save();
   }
 
   save() {
     store.cart = this.cart;
     store.save();
+  }
+
+  remove(name) {
+    this.cart = this.cart.filter(row => row.name !== name);
+    this.save();
   }
 
   //Shows content i shopping cart page
@@ -86,7 +112,7 @@ class ShoppingCart {
       .map(
         ({ name, price, deal, quantity }) => `
         <div class="col-sm-6 col-md-4 col-xl-4">
-            <p>${name} ${
+            <p ><span class="prodName">${name}</span>${
           deal ? '<span style="color:red">Deal - 3 for 2</span>' : ""
         }</p>
         </div>
@@ -99,8 +125,11 @@ class ShoppingCart {
         <div class="col-sm-6 col-md-4 col-xl-2">
           <p>${quantity}</p>
         </div>
-        <div class="col-sm-6 col-md-4 col-xl-2">
+        <div class="col-sm-6 col-md-4 col-xl-1">
           <p>${quantity * price}</p>
+         </div>
+         <div class="col-sm-6 col-md-4 col-xl-1">
+          <button class="remove-btn">Remove</button>
          </div>
         `
       )
@@ -133,6 +162,7 @@ class ShoppingCart {
           <button class="order-btn" >Order now!</button>
       </div>
     `;
+    this.addListenerRemove();
   }
 }
 
