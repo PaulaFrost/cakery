@@ -28,12 +28,12 @@ class ShoppingCart {
       let productEl = e.target.closest(".product");
       let name = productEl.querySelector("h1").innerHTML;
       let price = productEl.querySelector(".product-price span").innerHTML / 1;
-      console.log(name, price);
-      this.add(name, price);
+      let deal = productEl.querySelector(".deal");
+      this.add(name, price, deal);
     });
   }
 
-  add(name, price, quantity = 1) {
+  add(name, price, deal, quantity = 1) {
     let found = false;
     this.cart.forEach(row => {
       if (row.name === name) {
@@ -46,7 +46,7 @@ class ShoppingCart {
         name,
         price,
         quantity,
-        deal : true
+        deal
       });
     }
 
@@ -84,9 +84,11 @@ class ShoppingCart {
     cartEl.innerHTML = `
     ${this.cart
       .map(
-        ({ name, price, quantity }) => `
-        <div class="col-sm-6 col-md-4 col-xl-5">
-            <p>${name}</p>
+        ({ name, price, deal, quantity }) => `
+        <div class="col-sm-6 col-md-4 col-xl-4">
+            <p>${name} ${
+          deal ? '<span style="color:red">Deal - 3 for 2</span>' : ""
+        }</p>
         </div>
         <div class="col-sm-6 col-md-4 col-xl-2">
             <p>${price}</p>
@@ -95,8 +97,11 @@ class ShoppingCart {
             <p>SEK</p>
         </div>
         <div class="col-sm-6 col-md-4 col-xl-2">
-          <p class="remove-btn">${quantity}</p>
+          <p>${quantity}</p>
         </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <p>${quantity * price}</p>
+         </div>
         `
       )
       .join("")}`;
@@ -104,10 +109,13 @@ class ShoppingCart {
     let totalProd =
       // this.cart.length === 3
       //   ? this.cart.reduce((sum, { price, quantity }) => sum + price, 0) * 0.66
-      this.cart.reduce((sum, { price, quantity, deal }) => 
-        sum + price * quantity - (deal ? Math.floor(quantity/3)*price : 0)
-      , 0);
-      
+      this.cart.reduce(
+        (sum, { price, quantity, deal }) =>
+          sum +
+          price * quantity -
+          (deal ? Math.floor(quantity / 3) * price : 0),
+        0
+      );
 
     let moms = totalProd * 0.2;
     let shippingPrice = totalProd < 10000 ? 150 : 0;
