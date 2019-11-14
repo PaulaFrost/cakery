@@ -35,24 +35,18 @@ class ShoppingCart {
   }
 
   addListenerRemove() {
-    let removeBtn = document.querySelectorAll(".remove-btn");
-
-    if (!removeBtn) {
-      return;
-    }
-    console.log(removeBtn);
-
-    for (let i = 0; i < removeBtn.length; i++) {
-      removeBtn[i].addEventListener("click", e => {
-        console.log("heeej");
+    // delegated event listening
+    // we listen to all clicks on body but only react
+    // on clicks  on remove-button
+    document.body.addEventListener("click", e => {
+      if (e.target.closest(".remove-btn")) {
         let productEl = e.target.closest(".row");
         let name = productEl.querySelector(".prodName").innerHTML;
         console.log(name);
-
         this.remove(name);
         this.render();
-      });
-    }
+      }
+    });
   }
 
   add(name, price, deal, quantity = 1) {
@@ -82,6 +76,7 @@ class ShoppingCart {
   }
 
   remove(name) {
+    console.log(name);
     this.cart = this.cart.filter(row => row.name !== name);
     this.save();
   }
@@ -102,38 +97,37 @@ class ShoppingCart {
         <h4>Your cart currently is empty..</h4>
       </div>
         `;
-      return;
+    } else {
+      cartEl.innerHTML = `
+      ${this.cart
+        .map(
+          ({ name, price, deal, quantity }) => `
+            <div class="row">
+              <div class="col-sm-6 col-md-4 col-xl-4">
+                  <p ><span class="prodName">${name}</span>${
+            deal ? '<span style="color:red">Deal - 3 for 2</span>' : ""
+          }</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-2">
+                  <p>${price}</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-2">
+                  <p>SEK</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-2">
+                <p>${quantity}</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-1">
+                <p>${quantity * price}</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-1">
+                <button class="remove-btn">Remove</button>
+              </div>
+            </div>
+          `
+        )
+        .join("")}`;
     }
-
-    console.log(this.cart);
-
-    cartEl.innerHTML = `
-    ${this.cart
-      .map(
-        ({ name, price, deal, quantity }) => `
-        <div class="col-sm-6 col-md-4 col-xl-4">
-            <p ><span class="prodName">${name}</span>${
-          deal ? '<span style="color:red">Deal - 3 for 2</span>' : ""
-        }</p>
-        </div>
-        <div class="col-sm-6 col-md-4 col-xl-2">
-            <p>${price}</p>
-        </div>
-        <div class="col-sm-6 col-md-4 col-xl-2">
-            <p>SEK</p>
-        </div>
-        <div class="col-sm-6 col-md-4 col-xl-2">
-          <p>${quantity}</p>
-        </div>
-        <div class="col-sm-6 col-md-4 col-xl-1">
-          <p>${quantity * price}</p>
-         </div>
-         <div class="col-sm-6 col-md-4 col-xl-1">
-          <button class="remove-btn">Remove</button>
-         </div>
-        `
-      )
-      .join("")}`;
 
     let totalProd =
       // this.cart.length === 3
@@ -147,8 +141,8 @@ class ShoppingCart {
       );
 
     let moms = totalProd * 0.2;
-    let shippingPrice = totalProd < 10000 ? 150 : 0;
-    let total = totalProd + shippingPrice;
+    let shippingPrice = totalProd > 10000 ? 150 : 0;
+    let total = totalProd < 0 ?  0 : totalProd + shippingPrice;
 
     totalEl.innerHTML = `
     <div class="col-sm-6 col-md-4 col-xl-3">
@@ -162,7 +156,6 @@ class ShoppingCart {
           <button class="order-btn" >Order now!</button>
       </div>
     `;
-    this.addListenerRemove();
   }
 }
 
