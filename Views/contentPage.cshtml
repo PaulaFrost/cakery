@@ -6,21 +6,35 @@
 
 <!-- @Html.Partial("~/Views/Partials/SectionHeader.cshtml") -->
 <hr>
-<section class="section">
 
-    <div class="container">
-
-        <div class="col-md-3">
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-xl-6">
             <nav class="nav-bar nav-bar--list">
                 @Html.Partial("~/Views/Partials/Navigation/SubNavigation.cshtml")
             </nav>
         </div>
+    </div>
 
-        <div class="col-md-9">
-            <h1>Shopping Cart</h1>
-            <h5>Name Price</h5>
-            <div class="cart-body"></div>
+    <div class="row mb-5 mt-5">
+        <div class="col-sm-6 col-md-4 col-xl-6">
+            <h1>Shopping Cart</h1>  
         </div>
     </div>
 
-</section>
+    <div class="row mb-3">
+        <div class="col-sm-6 col-md-4 col-xl-5">
+            <h5>Product name</h5>
+        </div>
+         <div class="col-sm-6 col-md-4 col-xl-2">
+            <h5>Price</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+            <h5>Currency</h5>
+        </div>
+    </div>
+    
+    <div class="row cart-body"></div>
+    <div class="row total-amount mt-5"></div>
+    
+</div>
