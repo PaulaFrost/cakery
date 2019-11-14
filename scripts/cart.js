@@ -91,8 +91,9 @@ class ShoppingCart {
 
     let totalProd = this.cart.reduce((sum, { price }) => sum + price, 0);
     let moms = totalProd * 0.2;
-    let shippingPrice = 150;
+    let shippingPrice = (totalProd < 10000) ? 150 : 0;
     let total = totalProd + shippingPrice;
+    
 
     totalEl.innerHTML = `
     <div class="col-sm-6 col-md-4 col-xl-3">
