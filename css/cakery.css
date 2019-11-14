@@ -1,8 +1,22 @@
 .images {
     height: 200px;
     width: 200px;
+    overflow: hidden;
 }
 
-.backgroundColor{
-    background-color: blue;
+.card-text {
+    color: #B8B4A7;
+}
+
+.card-title {
+    color: #F3B2FE
+}
+
+.cupCakeImg {
+    margin-right: 10rem;
+}
+
+.card-img-top {
+    max-width: 560px;
+    margin-left: 25%;
 }
