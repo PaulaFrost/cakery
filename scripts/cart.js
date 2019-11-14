@@ -33,11 +33,23 @@ class ShoppingCart {
     });
   }
 
-  add(name, price) {
-    this.cart.push({
-      name,
-      price
+  add(name, price, quantity = 1) {
+    let found = false;
+    this.cart.forEach(row => {
+      if (row.name === name) {
+        row.quantity += quantity;
+        found = true;
+      }
     });
+    if (!found) {
+      this.cart.push({
+        name,
+        price,
+        quantity,
+        deal : true
+      });
+    }
+
     console.log(this.cart);
 
     this.save();
@@ -72,7 +84,7 @@ class ShoppingCart {
     cartEl.innerHTML = `
     ${this.cart
       .map(
-        ({ name, price }) => `
+        ({ name, price, quantity }) => `
         <div class="col-sm-6 col-md-4 col-xl-5">
             <p>${name}</p>
         </div>
@@ -83,17 +95,23 @@ class ShoppingCart {
             <p>SEK</p>
         </div>
         <div class="col-sm-6 col-md-4 col-xl-2">
-          <button class="remove-btn">Remove</button>
+          <p class="remove-btn">${quantity}</p>
         </div>
         `
       )
       .join("")}`;
 
-    let totalProd = this.cart.reduce((sum, { price }) => sum + price, 0);
+    let totalProd =
+      // this.cart.length === 3
+      //   ? this.cart.reduce((sum, { price, quantity }) => sum + price, 0) * 0.66
+      this.cart.reduce((sum, { price, quantity, deal }) => 
+        sum + price * quantity - (deal ? Math.floor(quantity/3)*price : 0)
+      , 0);
+      
+
     let moms = totalProd * 0.2;
-    let shippingPrice = (totalProd < 10000) ? 150 : 0;
+    let shippingPrice = totalProd < 10000 ? 150 : 0;
     let total = totalProd + shippingPrice;
-    
 
     totalEl.innerHTML = `
     <div class="col-sm-6 col-md-4 col-xl-3">
