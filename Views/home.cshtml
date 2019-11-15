@@ -9,35 +9,55 @@
   <div class="col-md-12">
     <div class="row h-100 align-items-center">
       <div class="col-md-12 text-center">
-        <h1 class="font-weight-light text-dark">@Model.HeroHeader</h1>
+        <img class="card-img col-md-auto" src="/media/peqf4pvn/artboard-1.png">
+        <!-- <div class="card-img-overlay">
+        <img src="/media/24sjaahh/cakery.png" class="img-fluid card-text pt-20" style="position: center;">
+        </div> -->
       </div>
     </div>
   </div>
 </header>
 
-<div class="container container-fluid">
-    <div class="row mb-3">
-        <div class="col-sm-6 col-md-6 col-xl-6"><a href="/wedding"><img class="img-fluid" src="/media/ltzkt054/joshua-glass-vilfdijcfvi-unsplash.jpg"></a></div>
-        <div class="col-sm-6 col-md-6 col-xl-6">
-            <h4>@Model.Value("weddingPageName")</h4>
-            <p>@Model.Value("weddingDescription")</p>
-            <a href="/wedding" class="btn">Read more here...</a>
-        </div>
+<div class="mt-5">
+  <div class="row no-gutters">
+    <div class="col-md-4 col-sm-4 col-xl-4">
+      <img src="/media/ojhhd0h2/weddingcakesmall.png" class="card-img text-nowrap" alt="wedding cake">
     </div>
-    <div class="row mb-3">
-        <div class="col-sm-6 col-md-4 col-xl-6"><a href="/birthday"><img class="img-fluid" src="/media/e0zgpvdn/cakes-on-table-1857157.jpg"></a></div>
-        <div class="col-sm-6 col-md-4 col-xl-6">
-            <h4>@Model.Value("birthdayPageName")</h4>
-            <p>@Model.Value("BirthdayDescription")</p>
-            <button><a href="/birthday" class="btn">Read more here...</a></button>
-        </div>
-        
     </div>
-    <div class="row mb-3">
-        <div class="col-sm-6 col-md-4 col-xl-6"><a href="/party"><img class="img-fluid" src="/media/zjzptr05/people-toasting-wine-glasses-3171837.jpg"></a></div>
-        <div class="col-sm-6 col-md-4 col-xl-6">
-            <h4>@Model.Value("partyPageName")</h4>
-            <p>@Model.Value("PartyDescription")</p>
-            <button><a href="/party" class="btn">Read more here...</a></button>
-        </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 mt-5">
+      <div class="card-body pt-9">
+        <h2 class="card-title">@Model.Value("weddingPageName")</h2>
+        <h4 class="card-text">@Model.Value("weddingDescription")</h4>
+        <a href="/wedding" class="btn btn-info">Read more</a>
+      </div>
     </div>
+  </div>
+</div>
+<div class=" mt-5">
+  <div class="row no-gutters">
+    <div class="col-md-6 col-sm-6 col-xl-6 mt-5">
+      <div class="card-body pt-9 text-right">
+        <h2 class="card-title">@Model.Value("partyPageName")</h2>
+        <h4 class="card-text">@Model.Value("PartyDescription")</h4>
+        <a href="/wedding" class="btn btn-info text-right">Read more</a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xl-4">
+      <img src="/media/pycozy3h/cupcake.png" class="cupCakeImg card-img text-nowrap" alt="Cupcake">
+    </div>
+  </div>
+</div>
+<div class="mt-5">
+  <div class="row no-gutters">
+    <div class="col-md-4 col-sm-4 col-xl-4">
+      <img src="/media/5ctd5e0r/doughnuts.png" class="card-img text-nowrap" alt="Doughnuts">
+    </div>
+    <div class="col-md-6 col-sm-6 col-xl-6 mt-5">
+      <div class="card-body pt-9">
+        <h2 class="card-title">@Model.Value("birthdayPageName")</h2>
+        <h4 class="card-text">@Model.Value("BirthdayDescription")</h4>
+        <a href="/birthday" class="btn btn-info">Read more</a>
+      </div>
+    </div>
+  </div>
+</div>
