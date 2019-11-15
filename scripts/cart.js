@@ -31,6 +31,7 @@ class ShoppingCart {
       let price = productEl.querySelector(".product-price span").innerHTML / 1;
       let deal = productEl.querySelector(".deal");
       this.add(name, price, deal);
+      alert("Successfully added to cart")
     });
   }
 
