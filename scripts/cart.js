@@ -144,6 +144,13 @@ class ShoppingCart {
     let shippingPrice = totalProd < 10000 ? 150 : 0;
     let total = totalProd < 0 ?  0 : totalProd + shippingPrice;
 
+    if (!this.cart.length) {
+      totalEl.innerHTML = `
+      <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
+        <h4></h4>
+      </div>
+        `;
+    } else {
     totalEl.innerHTML = `
     <div class="col-sm-6 col-md-4 col-xl-3">
           <h5>Shipping: ${shippingPrice} SEK</h5>
@@ -157,6 +164,7 @@ class ShoppingCart {
       </div>
     `;
   }
+}
 }
 
 new ShoppingCart();
