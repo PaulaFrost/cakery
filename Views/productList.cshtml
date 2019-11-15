@@ -1,33 +1,23 @@
 ﻿@inherits UmbracoViewPage<ContentModels.Category>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-    Layout = "master.cshtml";
+   Layout = "master.cshtml";
 }
 @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
-<section class="section">
-
-    <div class="container">
-        <div class="product-grid">
-            @if (Model.ProductCategoriesList != null)
-            {
-                foreach (ProductCategory productC in Model.ProductCategoriesList)
-                {
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
-                            <a href="@productC.Url" class="btn btn-primary">Read more</a>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
-
-</section>
-<!-- 
-<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div> -->
+<section class="section">    <div class="container">
+       <div class="product-grid row align-items-center">
+           @if (Model.ProductCategoriesList != null)
+           {
+               foreach (ProductCategory productC in Model.ProductCategoriesList)
+               {
+                   <div class="card col-sm-12 col-md-3 col-xl-3 m-2 align-self">
+                       <img class="card-img-top mt-2" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
+                       <div class="card-body">
+                           <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
+                           <a href="@productC.Url" class="btn btn-info">Read more</a>
+                       </div>
+                   </div>
+               }
+           }
+       </div>
+   </div></section>
