@@ -105,7 +105,7 @@ class ShoppingCart {
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
                   <p ><span class="prodName">${name}</span>${
-            deal ? '<span style="color:red">Deal - 3 for 2</span>' : ""
+            deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""
           }</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
