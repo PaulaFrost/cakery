@@ -6,18 +6,23 @@
     var home = (Home)Model.Root();
 }
 
-
-<section class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand ml-auto" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ml-auto" href="#"></a>
+    <button class="navbar-toggler" 
+      type="button" data-toggle="collapse" 
+      data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
-  <!-- uncomment this line if you don't want it to appear in the top navigation -->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
   <a style="color: black" class="nav-link  @Html.Raw(Model.Id == site.Id ? "navi-link--active" : "")" href="@site.Url">@site.Name</a>
-  @foreach (var item in selection)
-  {
+    @foreach (var item in selection)
+    {
       <a style="color: black" class="nav-link  @(item.IsAncestorOrSelf(Model) ? "nav-link--active" : null)" href="@item.Url">@item.Name</a>
-  }
-</section>
+    }
+    </div>
+</nav>
+
