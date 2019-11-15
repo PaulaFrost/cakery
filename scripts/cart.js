@@ -102,6 +102,23 @@ class ShoppingCart {
       ${this.cart
         .map(
           ({ name, price, deal, quantity }) => `
+          <div class="row mb-3">
+        <div class="col-sm-6 col-md-4 col-xl-4">
+            <h5>Product name</h5>
+        </div>
+         <div class="col-sm-6 col-md-4 col-xl-2">
+            <h5>Price</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+            <h5>Currency</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Quantity</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+            <h5>Sum</h5>
+        </div>
+    </div>
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
                   <p ><span class="prodName">${name}</span>${
