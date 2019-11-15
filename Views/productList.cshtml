@@ -8,15 +8,15 @@
        <div class="product-grid row align-items-center">
            @if (Model.ProductCategoriesList != null)
            {
-               foreach (ProductCategory productC in Model.ProductCategoriesList)
-               {
-                   <div class="card col-sm-12 col-md-3 col-xl-3 m-2 align-self">
-                       <img class="card-img-top mt-2" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
-                       <div class="card-body">
-                           <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
-                           <a href="@productC.Url" class="btn btn-info">Read more</a>
-                       </div>
-                   </div>
+                foreach (ProductCategory productC in Model.ProductCategoriesList)
+                {
+                <div class="card col-sm-12 col-md-3 col-xl-3 m-2 align-self">
+                    <img class="card-img-top mt-2" src="@productC.ProductCategoryImage.Url" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title product-grid__item__name" href="@productC.Url">@productC.ProductCategoryName</h5>
+                        <a href="@productC.Url" class="btn btn-info">Read more</a>
+                    </div>
+                </div>
                }
            }
        </div>

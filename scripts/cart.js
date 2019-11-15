@@ -148,8 +148,6 @@ class ShoppingCart {
     }
 
     let totalProd =
-      // this.cart.length === 3
-      //   ? this.cart.reduce((sum, { price, quantity }) => sum + price, 0) * 0.66
       this.cart.reduce(
         (sum, { price, quantity, deal }) =>
           sum +
