@@ -14,7 +14,13 @@
 .cupCakeImg {
     margin-right: 10rem;
 }
-
-.threeTwo{
-    color: rgb(252, 134, 154);
+.deal {
+    color: #F3B2FE;
+}
+.orderHistory{
+    color: rgb(247, 115, 214);
+}
+.hr{
+    margin-top: 100px;
+    background-color: rgb(247, 115, 214) 
 }

@@ -128,31 +128,31 @@ class ShoppingCart {
         `;
     } else {
       cartEl.innerHTML = `
+      <div class="row mb-3">
+        <div class="col-sm-6 col-md-4 col-xl-4">
+          <h5>Product name</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Price</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Currency</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Quantity</h5>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2">
+          <h5>Sum</h5>
+        </div>
+      </div>
       ${this.cart
         .map(
           ({ name, price, deal, quantity }) => `
-            <div class="row mb-3">
-            <div class="col-sm-6 col-md-4 col-xl-4">
-                <h5>Product name</h5>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-                <h5>Price</h5>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-                <h5>Currency</h5>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-              <h5>Quantity</h5>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-                <h5>Sum</h5>
-            </div>
-            </div>
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
-                  <p ><span class="prodName">${name}</span>${
-            deal ? '<span style="color: rgb(252, 134, 154)"> Deal - 3 for 2</span>' : ""
-          }</p>
+                <p ><span class="prodName">${name}</span>${
+                    deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""}
+                </p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
                   <p>${price}</p>
@@ -170,6 +170,7 @@ class ShoppingCart {
                 <button class="remove-btn btn btn-info">Remove</button>
               </div>
             </div>
+            <hr>
           `
         )
         .join("")}`;

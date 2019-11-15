@@ -3,7 +3,7 @@
 @{
     Layout = "master.cshtml";
 }
-<!-- for the section we want to show the shop header -->
+
 @Html.Partial("~/Views/Partials/SectionHeader.cshtml", Model.Parent)
 
 <section class="section product">
@@ -14,22 +14,21 @@
                     <img class="productCategory-image" src="@Model.ProductCategoryImage.Url" />
                 </div>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-6">
                 <h1>@Model.ProductCategoryName</h1>
                 @if(@Model.Deal){
-                    <h3 class="deal" style="color:red">3 for 2!</h3>
+                    <h3 class="deal">3 for 2!</h3>
                 }
                 <div class="product-teaser">@Model.ProductCategoryDescription</div>
                 <div class="product-price">Price: <span>@Model.Price</span></div>
                 <div class="product-button">
-                    <button class="button btn btn-info mt-3 buy-button button--border--solid">Buy</button>
+                    <button class="button buy-button btn btn-info mt-3">Buy</button>
                 </div>
         </div>
     </div>
 </section>
 <section class="section section--sand">
     <div class="container">
-        <!-- todo: Check if grid is empty via a property value converter -->
         @Html.GetGridHtml(Model, "bodyText", "bootstrap3-fluid")
     </div>
 </section>
