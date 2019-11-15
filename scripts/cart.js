@@ -121,7 +121,7 @@ class ShoppingCart {
                 <p>${quantity * price}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-1">
-                <button class="remove-btn">Remove</button>
+                <button class="remove-btn btn btn-info">Remove</button>
               </div>
             </div>
           `
@@ -141,7 +141,7 @@ class ShoppingCart {
       );
 
     let moms = totalProd * 0.2;
-    let shippingPrice = totalProd > 10000 ? 150 : 0;
+    let shippingPrice = totalProd < 10000 ? 150 : 0;
     let total = totalProd < 0 ?  0 : totalProd + shippingPrice;
 
     totalEl.innerHTML = `
@@ -153,7 +153,7 @@ class ShoppingCart {
     </div>
         <div class="col-sm-6 col-md-4 col-xl-4">
           <h5>Total: ${total} SEK</h5>
-          <button class="order-btn" >Order now!</button>
+          <button class="order-btn btn btn-info">Order now!</button>
       </div>
     `;
   }
