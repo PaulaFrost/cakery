@@ -100,10 +100,7 @@ class ShoppingCart {
         `;
     } else {
       cartEl.innerHTML = `
-      ${this.cart
-        .map(
-          ({ name, price, deal, quantity }) => `
-          <div class="row mb-3">
+     <div class="row mb-3">
         <div class="col-sm-6 col-md-4 col-xl-4">
             <h5>Product name</h5>
         </div>
@@ -119,7 +116,11 @@ class ShoppingCart {
         <div class="col-sm-6 col-md-4 col-xl-2">
             <h5>Sum</h5>
         </div>
-    </div>
+        </div>
+      ${this.cart
+        .map(
+          ({ name, price, deal, quantity }) => `
+         
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
                   <p ><span class="prodName">${name}</span>${
