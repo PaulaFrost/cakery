@@ -11,6 +11,7 @@ class OrderHistory {
    addOrderListener() {
    let orderBtn = document.querySelector(".order-btn");
    let orderPrint = document.querySelector(".orderHistory");
+   
   
       if (!orderBtn) {
         return;
@@ -18,13 +19,11 @@ class OrderHistory {
 
       orderBtn.addEventListener("click", e => {
         if(store.length != 0) {
-            let getStoredArray = localStorage.getItem("store");
-            let ArraySlice = getStoredArray.slice(9);
-            localStorage.setItem("OrderHist", JSON.stringify(ArraySlice));
-            let retrievedData = localStorage.getItem("OrderHist");
-            // let OrderToPrint = ;
-            let newOrderHistory = JSON.parse(retrievedData);
-            orderPrint.innerHTML = `<div><p>"${newOrderHistory}</p></div>`;
+          let getStoredArray = JSON.parse(localStorage.getItem("OrderHist")) || [];
+          let newOrder = JSON.parse(localStorage.getItem("store"));
+          getStoredArray.push(newOrder);
+          localStorage.setItem('OrderHist', JSON.stringify(getStoredArray))
+          console.log(getStoredArray);
         }else {
     
         }    
@@ -34,8 +33,6 @@ class OrderHistory {
   
 }
 new OrderHistory();
-
-
 
 
 
