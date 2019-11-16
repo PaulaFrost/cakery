@@ -1,5 +1,4 @@
 let store;
-let saveOrder;
 
 try {
   store = JSON.parse(localStorage.store);
@@ -11,24 +10,27 @@ store.save = function() {
   localStorage.store = JSON.stringify(this);
 };
 
+let newStore;
+
 try {
-  saveOrder = JSON.parse(localStorage.saveOrder);
+  newStore = JSON.parse(localStorage.newStore);
 }catch (e) {
-  saveOrder = {}
+  newStore = {}
 }
 
-saveOrder.save = function() {
-  localStorage.saveOrder = JSON.stringify(this);
+newStore.save = function() {
+  localStorage.newStore = JSON.stringify(this);
 }
-
-console.log(store)
 
 class ShoppingCart {
   constructor() {
     this.cart = store.cart || [];
+    this.order = newStore.order || [];
     this.render();
     this.addListener();
     this.addListenerRemove();
+    this.submitListener();
+    this.getDate();
   }
 
   addListener() {
@@ -44,13 +46,11 @@ class ShoppingCart {
       let price = productEl.querySelector(".product-price span").innerHTML / 1;
       let deal = productEl.querySelector(".deal");
       this.add(name, price, deal);
+      alert('Successfully added to cart');
     });
   }
 
   addListenerRemove() {
-    // delegated event listening
-    // we listen to all clicks on body but only react
-    // on clicks  on remove-button
     document.body.addEventListener("click", e => {
       if (e.target.closest(".remove-btn")) {
         let productEl = e.target.closest(".row");
@@ -64,20 +64,12 @@ class ShoppingCart {
 
   submitListener(){
     document.body.addEventListener("click", e => {
-      if(e.target.closest(".order-btn")){
-        let name = productEl.querySelector("h1").innerHTML;
-        let price = productEl.querySelector(".product-price span").innerHTML / 1;
-        let deal = productEl.querySelector(".deal");
-        this.save(name, price, deal);
+      if (e.target.closest(".order-btn")) {
+        this.listOutOrder();
+        this.clear();
+        this.render();
       }
-    })
-  }
-
-  saveOrderListener() {
-      let saveOrderBtn = document.querySelector(".saveOrder");
-      saveOrderBtn.document.body.addEventListener("click", e => {
-        let order = e.target.closest("h1").innerHTML;
-    })
+    });
   }
 
   add(name, price, deal, quantity = 1) {
@@ -90,13 +82,27 @@ class ShoppingCart {
     });
     if (!found) {
       this.cart.push({
-        name,
-        price,
-        quantity,
-        deal
+        name, price, quantity, deal
       });
     }
     this.save();
+  }
+
+  addNew(name, price, deal, quantity = 1) {
+    let date = this.getDate();
+    let found = false;
+    this.order.forEach(row => {
+      if (row.name === name) {
+        row.quantity += quantity;
+        found = true;
+      }
+    });
+    if (!found) {
+      this.order.push({
+        name, price, quantity, deal, date
+      });
+    }
+    this.newSave();
   }
 
   save() {
@@ -104,22 +110,49 @@ class ShoppingCart {
     store.save();
   }
 
+  newSave(){
+    newStore.order = this.order;
+    newStore.save();
+  }
+
+  listOutOrder(){
+   let oldCart = this.cart;
+   const newCart = oldCart.filter(arr => arr.name);
+   console.log(newCart);
+   this.addNew(newCart);
+   this.newSave();
+  }
+
+  clear(){
+    this.cart = [];
+    this.save();
+  }
+
   remove(name) {
-    console.log(name);
     this.cart = this.cart.filter(row => row.name !== name);
     this.save();
   }
 
-  //Shows content i shopping cart page
+  getDate(){
+    let today = new Date();
+    let date = today.getFullYear() + '-' +(today.getMonth()+1) + '-' + today.getDate();
+    let min = today.getMinutes();
+    min < 10 ? min = '0' + min : min = min + '';
+    let hours = today.getHours();
+    hours < 10 ? hours = '0' + hours : hours = hours + '';
+    let fullTime = date + ' ' + hours + ':' + min;  
+    return fullTime;
+  }
 
   render(
     cartEl = document.querySelector(".cart-body"),
     totalEl = document.querySelector(".total-amount"),
-    submitEl = document.querySelector("cart-history")) 
-  {
+    submitEl = document.querySelector(".cart-history")){
+  
     if (!cartEl) {
       return;
     }
+    
     if (!this.cart.length) {
       cartEl.innerHTML = `
       <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
@@ -150,18 +183,18 @@ class ShoppingCart {
           ({ name, price, deal, quantity }) => `
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
-                <p ><span class="prodName">${name}</span>${
+                <p class="prodName">${name}${
                     deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""}
                 </p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                  <p>${price}</p>
+                  <p class="prod-price">${price}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
                   <p>SEK</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                <p>${quantity}</p>
+                <p class="prod-qua">${quantity}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-1">
                 <p>${quantity * price}</p>
@@ -170,15 +203,11 @@ class ShoppingCart {
                 <button class="remove-btn btn btn-info">Remove</button>
               </div>
             </div>
-            <hr>
-          `
-        )
+            <hr>`)
         .join("")}`;
     }
 
     let totalProd =
-      // this.cart.length === 3
-      //   ? this.cart.reduce((sum, { price, quantity }) => sum + price, 0) * 0.66
       this.cart.reduce(
         (sum, { price, quantity, deal }) =>
           sum +
@@ -199,61 +228,50 @@ class ShoppingCart {
         `;
     }else{
     totalEl.innerHTML = `
-    <div class="col-sm-6 col-md-4 col-xl-3">
-          <h5>Shipping: ${shippingPrice} SEK</h5>
-          <a class="" href="#">Order history</a>
+      <div class="col-sm-6 col-md-4 col-xl-3">
+        <h5>Shipping: ${shippingPrice} SEK</h5>
       </div>
-    <div class="col-sm-6 col-md-4 col-xl-5">
-          <h5>VAT: ${moms} SEK</h5>
-          <a class="saveOrder" href="#">Save order</a>
-    </div>
-        <div class="col-sm-6 col-md-4 col-xl-4">
-          <h5>Total: ${total} SEK</h5>
-          <button class="order-btn btn btn-info mt-3">Submit order</button>
+      <div class="col-sm-6 col-md-4 col-xl-5">
+        <h5>VAT: ${moms} SEK</h5>
       </div>
-    `;
-  }
-   
-    if (!submitEl) {
-      return;
-    }
+      <div class="col-sm-6 col-md-4 col-xl-4">
+        <h5>Total: ${total} SEK</h5>
+        <button class="order-btn btn btn-info mt-3">Submit order</button>
+      </div>`;
+  } 
 
-    if (!this.cart.length) {
+    if (!this.order.length) {
       submitEl.innerHTML = `
       <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
-      <h2>Order history</h2>
-        <h4>No order history</h4>
+        <h4>No order history...</h4>
       </div>
         `;
     } else {
-      submit.innerHTML = `
-      ${this.cart
-        .map(
-          ({ name, price, deal, quantity }) => `
+      submitEl.innerHTML = `
+      ${this.order.map(
+          ({ name:[{name, price, deal, quantity}] ,date}) => `
             <div class="row">
+              <div class="col-sm-6 col-md-4 col-xl-2">
+                <p>${date}</p>
+              </div>
               <div class="col-sm-6 col-md-4 col-xl-4">
-                  <p ><span class="prodName">${name}</span>${
-            deal ? '<span style="color: rgb(252, 134, 154)"> Deal - 3 for 2</span>' : ""
-          }</p>
+                <p><span class="prodName">${name}</span>
+                ${deal ? '<span style="color: rgb(252, 134, 154)"> Deal - 3 for 2</span>' : ""}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                  <p>${price}</p>
+                <p>${price}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                  <p>SEK</p>
+                <p>SEK</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
                 <p>${quantity}</p>
               </div>
-              <div class="col-sm-6 col-md-4 col-xl-1">
-                <p>${quantity * price}</p>
-              </div>
             </div>
-          `
-        )
+          <hr>`)
         .join("")}`;
     }
-  }
+   }
 }
 
 new ShoppingCart();
