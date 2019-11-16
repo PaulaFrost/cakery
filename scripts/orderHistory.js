@@ -1,6 +1,7 @@
 //jag vill hämta ordern från local storage vid order-knapp-tryck, sen pusha in till ny array
-//sen spara ny array så att den inte försvinner vid reload eller om jag tar bort från cart
-//sen vill jag skriva ut order arrayen i en omsluten div
+//sen spara nya arrayen TILL EN annan array så att den inte försvinner vid reload eller om jag tar bort från cart
+// nästa grej är att se till att jag kan lägga till mer än en order i historiken
+//sen vill jag skriva ut order arrayen med order-arrayerna i en omsluten div
 
 class OrderHistory {
       constructor() {
@@ -9,28 +10,30 @@ class OrderHistory {
 
    addOrderListener() {
    let orderBtn = document.querySelector(".order-btn");
+   let orderPrint = document.querySelector(".orderHistory");
   
       if (!orderBtn) {
         return;
       }
 
       orderBtn.addEventListener("click", e => {
-          console.log("you clicked me!");
         if(store.length != 0) {
-            let test = localStorage.getItem("store");
-            let ArraySlice = test.slice(9);
+            let getStoredArray = localStorage.getItem("store");
+            let ArraySlice = getStoredArray.slice(9);
             localStorage.setItem("OrderHist", JSON.stringify(ArraySlice));
             let retrievedData = localStorage.getItem("OrderHist");
+            // let OrderToPrint = ;
             let newOrderHistory = JSON.parse(retrievedData);
-            console.log("cart from test " + newOrderHistory);
+            orderPrint.innerHTML = `<div><p>"${newOrderHistory}</p></div>`;
         }else {
     
         }    
     });   
    };
-
+  
+  
 }
-
+new OrderHistory();
 
 
 
@@ -75,4 +78,4 @@ class OrderHistory {
 //    } 
 
 // }
-new OrderHistory();
+
