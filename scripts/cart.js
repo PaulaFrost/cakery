@@ -10,22 +10,10 @@ store.save = function() {
   localStorage.store = JSON.stringify(this);
 };
 
-let newStore;
-
-try {
-  newStore = JSON.parse(localStorage.newStore);
-}catch (e) {
-  newStore = {}
-}
-
-newStore.save = function() {
-  localStorage.newStore = JSON.stringify(this);
-}
-
 class ShoppingCart {
   constructor() {
     this.cart = store.cart || [];
-    this.order = newStore.order || [];
+    this.order = store.order || [];
     this.render();
     this.addListener();
     this.addListenerRemove();
@@ -64,8 +52,9 @@ class ShoppingCart {
 
   submitListener(){
     document.body.addEventListener("click", e => {
-      if (e.target.closest(".order-btn")) {
+      if (e.target.closest(".order-btn")) { 
         this.listOutOrder();
+        alert("Thank you for the order!")
         this.clear();
         this.render();
       }
@@ -88,39 +77,29 @@ class ShoppingCart {
     this.save();
   }
 
-  addNew(name, price, deal, quantity = 1) {
-    let date = this.getDate();
-    let found = false;
-    this.order.forEach(row => {
-      if (row.name === name) {
-        row.quantity += quantity;
-        found = true;
-      }
-    });
-    if (!found) {
-      this.order.push({
-        name, price, quantity, deal, date
-      });
-    }
-    this.newSave();
-  }
-
   save() {
     store.cart = this.cart;
     store.save();
   }
 
   newSave(){
-    newStore.order = this.order;
-    newStore.save();
+    store.order = this.order;
+    store.save();
   }
 
   listOutOrder(){
-   let oldCart = this.cart;
-   const newCart = oldCart.filter(arr => arr.name);
-   console.log(newCart);
-   this.addNew(newCart);
-   this.newSave();
+    let date = this.getDate();
+    let shipping = document.getElementById("shipping").innerHTML;
+    let vat = document.getElementById("vat").innerHTML;
+    let totalOrder = document.getElementById("total").innerHTML;
+    
+    let oldCart = this.cart;
+    let newCart = oldCart.filter(arr => arr.name.length);
+    let myCart = newCart;
+    let newOrder  = { date, shipping, vat, totalOrder, myCart }
+
+    this.order.push(newOrder);
+    this.newSave();
   }
 
   clear(){
@@ -140,7 +119,7 @@ class ShoppingCart {
     min < 10 ? min = '0' + min : min = min + '';
     let hours = today.getHours();
     hours < 10 ? hours = '0' + hours : hours = hours + '';
-    let fullTime = date + ' ' + hours + ':' + min;  
+    let fullTime = date + ' ' + hours + ':' + min; 
     return fullTime;
   }
 
@@ -156,9 +135,8 @@ class ShoppingCart {
     if (!this.cart.length) {
       cartEl.innerHTML = `
       <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
-        <h4>Your cart currently is empty..</h4>
-      </div>
-        `;
+        <h4>Your cart is currently empty..</h4>
+      </div>`;
     } else {
       cartEl.innerHTML = `
       <div class="row mb-3">
@@ -178,23 +156,22 @@ class ShoppingCart {
           <h5>Sum</h5>
         </div>
       </div>
-      ${this.cart
-        .map(
+      ${this.cart.map(
           ({ name, price, deal, quantity }) => `
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
-                <p class="prodName">${name}${
-                    deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""}
+                <p id="name" class="prodName">${name}${
+                    deal ? '<span id="deal" class="deal"> Deal - 3 for 2</span>' : ""}
                 </p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                  <p class="prod-price">${price}</p>
+                  <p id="price" class="prod-price">${price}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
                   <p>SEK</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                <p class="prod-qua">${quantity}</p>
+                <p id="quantity" class="prod-qua">${quantity}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-1">
                 <p>${quantity * price}</p>
@@ -207,14 +184,10 @@ class ShoppingCart {
         .join("")}`;
     }
 
-    let totalProd =
-      this.cart.reduce(
+    let totalProd = this.cart.reduce(
         (sum, { price, quantity, deal }) =>
-          sum +
-          price * quantity -
-          (deal ? Math.floor(quantity / 3) * price : 0),
-        0
-      );
+          sum + price * quantity -
+          (deal ? Math.floor(quantity / 3) * price : 0), 0 );
 
     let moms = totalProd * 0.2;
     let shippingPrice = totalProd < 10000 ? 150 : 0;
@@ -227,50 +200,60 @@ class ShoppingCart {
       </div>
         `;
     }else{
-    totalEl.innerHTML = `
+      totalEl.innerHTML = `
       <div class="col-sm-6 col-md-4 col-xl-3">
-        <h5>Shipping: ${shippingPrice} SEK</h5>
+        <h5>Shipping: <span id="shipping">${shippingPrice}</span> SEK</h5>
       </div>
       <div class="col-sm-6 col-md-4 col-xl-5">
-        <h5>VAT: ${moms} SEK</h5>
+        <h5>VAT: <span id="vat">${moms}</span> SEK</h5>
       </div>
       <div class="col-sm-6 col-md-4 col-xl-4">
-        <h5>Total: ${total} SEK</h5>
+        <h5>Total: <span  id="total">${total}</span> SEK</h5>
         <button class="order-btn btn btn-info mt-3">Submit order</button>
-      </div>`;
-  } 
+      </div>`;} 
 
     if (!this.order.length) {
       submitEl.innerHTML = `
       <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
-        <h4>No order history...</h4>
+        <h4>No order history..</h4>
       </div>
         `;
     } else {
       submitEl.innerHTML = `
-      ${this.order.map(
-          ({ name:[{name, price, deal, quantity}] ,date}) => `
+      ${this.order.reverse().map(
+          ({date, shipping, vat, totalOrder, myCart}) => `
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <p class="font-weight-bold">${date}</p>
+            </div>
+          </div>  
+          ${myCart.map(({name, price, quantity, deal}) => `
             <div class="row">
-              <div class="col-sm-6 col-md-4 col-xl-2">
-                <p>${date}</p>
-              </div>
               <div class="col-sm-6 col-md-4 col-xl-4">
                 <p><span class="prodName">${name}</span>
-                ${deal ? '<span style="color: rgb(252, 134, 154)"> Deal - 3 for 2</span>' : ""}</p>
+                  ${deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""}</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                <p>${price}</p>
+                <p>${price} SEK</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                <p>SEK</p>
+                <p>Quantity: ${quantity}</p>
+              </div>
+            </div>`).join("")}
+            <div class="row">
+              <div class="col-sm-6 col-md-4 col-xl-2">
+                <p class="font-weight-bold">Shipping: ${shipping} SEK</p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
-                <p>${quantity}</p>
+                <p class="font-weight-bold">VAT: ${vat} SEK</p>
+              </div>
+              <div class="col-sm-6 col-md-4 col-xl-3">
+                <p class="font-weight-bold">Total: ${totalOrder} SEK</p>
               </div>
             </div>
           <hr>`)
         .join("")}`;
-    }
+      }
    }
 }
 
