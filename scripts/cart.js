@@ -59,7 +59,6 @@ class ShoppingCart {
   addListenerOrder() {
     document.body.addEventListener("click", e => {
       if (e.target.closest(".order-btn")) {
-        //let rawDate = (new Date()).toISOString().split('T');
         let date = this.getDate();
         let orderEl = e.target.closest(".total-amount");
         let orderTotalAmount = orderEl.querySelector(".total-value span").innerHTML;
@@ -83,8 +82,6 @@ class ShoppingCart {
 
         this.clearCart();
         this.render();
-
-       //console.log("cart", this.cart);
       }
     });
   }
@@ -119,17 +116,14 @@ class ShoppingCart {
   save() {
     store.cart = this.cart;
     store.save();
-    console.log(this.cart);
   }
 
   saveOrder() {
     store.orders = this.orders;
     store.save();
-    //console.log(this.orders);
   }
 
   remove(name) {
-    console.log(name);
     this.cart = this.cart.filter(row => row.name !== name);
     this.save();
   }
@@ -189,8 +183,8 @@ class ShoppingCart {
             <div class="row">
               <div class="col-sm-6 col-md-4 col-xl-4">
                 <p ><span class="prodName">${name}</span>${
-            deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""
-          }</p>
+                  deal ? '<span class="deal"> Deal - 3 for 2</span>' : ""}
+                </p>
               </div>
               <div class="col-sm-6 col-md-4 col-xl-2">
                 <p>${price}</p>
@@ -210,7 +204,7 @@ class ShoppingCart {
             </div>
           `
         )
-        .join("")}`;
+      .join("")}`;
     }
 
     // Mathlogic and shows Total amount and shipping in page
@@ -230,7 +224,7 @@ class ShoppingCart {
         <div class="col-sm-12 col-md-12 col-xl-12 text-center mt-5">
           <h4></h4>
         </div>
-        `;
+      `;
     } else {
       totalEl.innerHTML = `
         <div class="col-sm-6 col-md-4 col-xl-3">
