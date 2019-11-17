@@ -10,6 +10,10 @@ store.save = function() {
   localStorage.store = JSON.stringify(this);
 };
 
+store.remove = function() {
+  localStorage.store.removeItem('cart');
+};
+
 class ShoppingCart {
   constructor() {
     this.cart = store.cart || [];
@@ -55,14 +59,13 @@ class ShoppingCart {
   addListenerOrder() {
     document.body.addEventListener("click", e => {
       if (e.target.closest(".order-btn")) {
-        let date = Date.now();
+        let date = new Date();
         let orderEl = e.target.closest(".total-amount");
-        let orderTotalAmount = orderEl.querySelector(".total-value span")
-          .innerHTML;
+        let orderTotalAmount = orderEl.querySelector(".total-value span").innerHTML;
         let orderVatAmount = orderEl.querySelector(".total-vat span").innerHTML;
-        let orderShippingAmount = orderEl.querySelector(".total-shipping span")
-          .innerHTML;
+        let orderShippingAmount = orderEl.querySelector(".total-shipping span").innerHTML;
         let cartItems = this.cart.filter(item => item.name.length);
+        
         let oldCart = cartItems;
 
         let orderItem = {
@@ -72,15 +75,15 @@ class ShoppingCart {
           orderShippingAmount,
           oldCart
         };
-
+        
         this.orders.push(orderItem);
-        store.save();
-        alert("Successfully ordered!");
-        this.cart = [];
+        this.saveOrder();
+        //alert("Successfully ordered!");
+
+        this.clearCart();
         this.render();
 
-        console.log("cart", this.cart);
-        console.log("orders", this.orders);
+       //console.log("cart", this.cart);
       }
     });
   }
@@ -121,12 +124,17 @@ class ShoppingCart {
   saveOrder() {
     store.orders = this.orders;
     store.save();
-    console.log(this.orders);
+    //console.log(this.orders);
   }
 
   remove(name) {
     console.log(name);
     this.cart = this.cart.filter(row => row.name !== name);
+    this.save();
+  }
+
+  clearCart() {
+    this.cart = [];
     this.save();
   }
 
@@ -255,7 +263,29 @@ class ShoppingCart {
           <h6>Total</h6>
         </div>
       </div>
-     }`;
+      ${this.orders
+        .map(
+          ({ date, orderTotalAmount, oldCart, orderShippingAmount}) => `
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <p>${date}<p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <p>${orderTotalAmount} SEK<p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <p>${orderShippingAmount} SEK<p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-4">
+              ${oldCart.map(({ name, price }) => `
+                <p>${name} ${price} SEK</p>`
+               ).join("")}
+            </div>
+          </div>
+            `
+        )
+        .join("")}
+     `;
     }
   }
 }
