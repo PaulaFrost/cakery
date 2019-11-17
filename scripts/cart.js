@@ -19,7 +19,6 @@ class ShoppingCart {
     this.addListenerRemove();
     this.addListenerOrder();
     this.addListenerViewOrders();
-    //this.renderOrderHistory();
   }
 
   addListener() {
@@ -54,7 +53,6 @@ class ShoppingCart {
   }
 
   addListenerOrder() {
-    ///////////////////////////////////////////////
     document.body.addEventListener("click", e => {
       if (e.target.closest(".order-btn")) {
         let date = Date.now();
@@ -65,23 +63,24 @@ class ShoppingCart {
         let orderShippingAmount = orderEl.querySelector(".total-shipping span")
           .innerHTML;
         let cartItems = this.cart.filter(item => item.name.length);
+        let oldCart = cartItems;
 
-        this.orders.push({
-          order: {
-            date,
-            orderTotalAmount,
-            orderVatAmount,
-            orderShippingAmount,
-            cartItems
-          }
-        });
+        let orderItem = {
+          date,
+          orderTotalAmount,
+          orderVatAmount,
+          orderShippingAmount,
+          oldCart
+        };
+
+        this.orders.push(orderItem);
         store.save();
         alert("Successfully ordered!");
         this.cart = [];
         this.render();
 
-        console.log('cart', this.cart);
-        console.log('orders', this.orders);
+        console.log("cart", this.cart);
+        console.log("orders", this.orders);
       }
     });
   }
@@ -122,6 +121,7 @@ class ShoppingCart {
   saveOrder() {
     store.orders = this.orders;
     store.save();
+    console.log(this.orders);
   }
 
   remove(name) {
@@ -195,6 +195,8 @@ class ShoppingCart {
         .join("")}`;
     }
 
+    // Mathlogic and shows Total amount and shipping in page
+
     let totalProd = this.cart.reduce(
       (sum, { price, quantity, deal }) =>
         sum + price * quantity - (deal ? Math.floor(quantity / 3) * price : 0),
@@ -227,6 +229,8 @@ class ShoppingCart {
     }
   }
 
+  // Shows order history after clicking "View your order history"-button
+
   renderOrderHistory(orderEl = document.querySelector(".show-orderHistory")) {
     if (!orderEl) {
       return;
@@ -251,20 +255,7 @@ class ShoppingCart {
           <h6>Total</h6>
         </div>
       </div>
-      ${this.orders
-        .map(
-          ({ date, orderTotalAmount, orderArray }) => `
-          <div class="row">
-            <div class="col-sm-6 col-md-4 col-xl-2">
-              <p>${date}<p>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-4">
-              <p>${orderTotalAmount} SEK<p>
-            </div>
-          </div>
-            `
-        )
-        .join("")}`;
+     }`;
     }
   }
 }
