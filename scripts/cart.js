@@ -59,7 +59,8 @@ class ShoppingCart {
   addListenerOrder() {
     document.body.addEventListener("click", e => {
       if (e.target.closest(".order-btn")) {
-        let date = new Date();
+        //let rawDate = (new Date()).toISOString().split('T');
+        let date = this.getDate();
         let orderEl = e.target.closest(".total-amount");
         let orderTotalAmount = orderEl.querySelector(".total-value span").innerHTML;
         let orderVatAmount = orderEl.querySelector(".total-vat span").innerHTML;
@@ -78,7 +79,7 @@ class ShoppingCart {
         
         this.orders.push(orderItem);
         this.saveOrder();
-        //alert("Successfully ordered!");
+        alert("Successfully ordered!");
 
         this.clearCart();
         this.render();
@@ -136,6 +137,15 @@ class ShoppingCart {
   clearCart() {
     this.cart = [];
     this.save();
+  }
+
+  getDate() {
+    let rawDate = (new Date()).toISOString().split('T');
+    let YYmmDD = rawDate[0];
+    let time = rawDate[1]
+    let date = YYmmDD + ' ' + time.split('.')[0];
+
+    return date;
   }
 
   //Shows content i shopping cart page
@@ -251,35 +261,35 @@ class ShoppingCart {
     } else {
       orderEl.innerHTML = `
       <div class="row">
-        <div class="col-sm-6 col-md-4 col-xl-4 mb-4">
+        <div class="col-sm-6 col-md-4 col-xl-4 mb-2">
           <h5>Orders</h5>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-4 col-xl-2">
-          <h6>Date</h6>
-        </div>
-        <div class="col-sm-6 col-md-4 col-xl-4">
-          <h6>Total</h6>
-        </div>
       </div>
-      ${this.orders
+      ${this.orders.reverse()
         .map(
           ({ date, orderTotalAmount, oldCart, orderShippingAmount}) => `
+          <hr>
           <div class="row">
-            <div class="col-sm-6 col-md-4 col-xl-2">
-              <p>${date}<p>
+            <div class="col-sm-6 col-md-4 col-xl-3">
+              <p>Date: ${date}<p>
             </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-              <p>${orderTotalAmount} SEK<p>
-            </div>
-            <div class="col-sm-6 col-md-4 col-xl-2">
-              <p>${orderShippingAmount} SEK<p>
-            </div>
+          </div>
+          <div class="row">
             <div class="col-sm-6 col-md-4 col-xl-4">
               ${oldCart.map(({ name, price }) => `
-                <p>${name} ${price} SEK</p>`
+                <p>${name}:  ${price} SEK</p>`
                ).join("")}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <p>Shipping: ${orderShippingAmount} SEK<p>
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-2">
+              <h5>Total: ${orderTotalAmount} SEK</h5>
             </div>
           </div>
             `
