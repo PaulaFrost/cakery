@@ -5,7 +5,7 @@
 
 class OrderHistory {
       constructor() {
-        this.addOrderListener(); 
+        this.addOrderListener();
       }
 
    addOrderListener() {
@@ -16,63 +16,57 @@ class OrderHistory {
       if (!orderBtn) {
         return;
       }
-
+   
       orderBtn.addEventListener("click", e => {
-        if(store.length != 0) {
+        if(!store.length) {
           let getStoredArray = JSON.parse(localStorage.getItem("OrderHist")) || [];
           let newOrder = JSON.parse(localStorage.getItem("store"));
           getStoredArray.push(newOrder);
           localStorage.setItem('OrderHist', JSON.stringify(getStoredArray))
-          console.log(getStoredArray);
         }else {
     
-        }    
+        }
+
+        function printOrderHistory() {
+          let getOrderHistoryArray = JSON.parse(localStorage.getItem("OrderHist")) || [];
+          orderPrint.innerHTML = `
+                      <div class="row">
+                        <div class="col-sm-4 col-md-2 col-xl-1 mb-4">
+                          <h5>Order history</h5>
+                        </div>
+                      </div>
+                      ${getOrderHistoryArray
+                        .reverse()
+                        .map(
+                          ({ date, cart}) => `
+                          <div class="row col-xl-12">
+                            <div class="col-sm-6 col-md-4 col-xl-4">
+                              <p>${"Purchase date: " + new Date().toLocaleDateString()}<p>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xl-2">
+                            ${cart.map(({price}) => `
+                            <p>${"Price: " + price}</p>`
+                           ).join("")}
+                          </div>
+                            <div class="col-sm-6 col-md-4 col-xl-4">
+                              ${cart.map(({name}) => `
+                                <p>${"Package: " + name}</p>`
+                               ).join("")}
+                            </div>
+                            <hr>
+                          </div>
+                            `
+                        )
+                        .join("")}
+                     `;
+        }
+        printOrderHistory();
+     
     });   
    };
-  
-  
+
+
+   
+
 }
 new OrderHistory();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class OrderHistory {
-//   constructor() {
-//     this.addOrderListener();
-    
-//   }
-
-//    addOrderListener() {
-//    let orderBtn = document.querySelector(".order-btn");
-  
-//       if (!orderBtn) {
-//         return;
-//       }
-
-//       orderBtn.addEventListener("click", e => {
-
-//           let element = e.target.closest(".order-tot");
-//           let totalSum = element.querySelector("h5").innerHTML;
-//           console.log(totalSum)
-//           });
-      
-//    } 
-
-// }
-
